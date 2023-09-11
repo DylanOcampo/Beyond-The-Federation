@@ -22,6 +22,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     public float groundDrag;
 
+    [Header("Attack")]
+
     [Header("Animations")]
     public Animator PlayerAnimation, FlipAnimation;
     public SpriteRenderer PlayerSpriteRenderer;
@@ -32,7 +34,9 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    bool doublejump = false;
     bool readyToJump;
+    bool DoOnceJump = true;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -43,6 +47,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode attackKey = KeyCode.Mouse0;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -94,6 +99,9 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     public TextMeshProUGUI text_speed;
     public TextMeshProUGUI text_mode;
+
+    [HideInInspector]
+    public bool CanAttack = true;
 
     private void Start()
     {
@@ -159,14 +167,49 @@ public class PlayerMovementAdvanced : MonoBehaviour
         horizontalInput = -horizontalInput;
         verticalInput = -verticalInput;
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        
+        if (Input.GetKey(jumpKey))
         {
-            readyToJump = false;
 
-            Jump();
+            if (grounded || doublejump)
+            {
+                if (readyToJump)
+                {
+                    Jump();
+                    readyToJump = false;
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                }
+                if (doublejump)
+                {
+                    Jump();
+                    doublejump = false;
+                    Invoke(nameof(ResetJump), jumpCooldown);
+                }
+
+            }
+
         }
+        
+        if (Input.GetKeyUp(jumpKey) && DoOnceJump)
+        {
+            doublejump = true;
+            DoOnceJump = false;
+        }
+
+        if(grounded && !Input.GetKey(jumpKey))
+        {
+            doublejump = false;
+            DoOnceJump = true;
+        }
+
+        if(Input.GetKey(attackKey) && grounded && CanAttack)
+        {
+            Attack();
+            CanAttack = false;
+        }
+        
+
+        
 
         // start crouch
         if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
@@ -389,6 +432,13 @@ public class PlayerMovementAdvanced : MonoBehaviour
             }
         }
     }
+    private void Attack()
+    {
+        PlayerAnimation.SetTrigger("Attack");
+
+    }
+
+    
 
     private void Jump()
     {

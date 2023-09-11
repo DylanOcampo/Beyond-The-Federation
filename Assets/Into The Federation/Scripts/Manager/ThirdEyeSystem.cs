@@ -7,8 +7,21 @@ using UnityEngine.Events;
 
 public class ThirdEyeSystem : MonoBehaviour
 {
-    public class ThirdEyeSystemEvent : UnityEvent<bool> { }
+    private static ThirdEyeSystem _instance;
+    public static ThirdEyeSystem instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<ThirdEyeSystem>();
+            }
+            return _instance;
+        }
+    }
 
+    public class ThirdEyeSystemEvent : UnityEvent<bool> { }
+    
     public ThirdEyeSystemEvent OnActivate;
     public GameObject  CanvasColor;
     public Camera MainCamera;
@@ -25,6 +38,7 @@ public class ThirdEyeSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(2)){
             Switch = !Switch;
             if(Switch){

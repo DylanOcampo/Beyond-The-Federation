@@ -9,10 +9,10 @@ public class ThirdEyeEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ThirdEye.OnActivate.AddListener(OnActivate);
+        //ThirdEye.OnActivate.AddListener(OnActivate);
     }
     void OnDestroy(){
-        ThirdEye.OnActivate.RemoveListener(OnActivate);
+        //ThirdEye.OnActivate.RemoveListener(OnActivate);
     }
 
     // Update is called once per frame
