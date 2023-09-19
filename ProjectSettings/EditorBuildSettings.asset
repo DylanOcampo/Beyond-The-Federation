@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Into The Federation/Scenes/Jessi.unity
     guid: f88c9c9b1797a7541b782cb466e69afd
   - enabled: 1
-    path: Assets/Into The Federation/Scenes/Milestone 1.unity
-    guid: 8faec4cdfe79057469bd4f4c753aba37
-  - enabled: 1
     path: Assets/Into The Federation/Scenes/Main Menu.unity
     guid: ace6372bca9b82f4799446ec0c92213d
+  - enabled: 1
+    path: Assets/Into The Federation/Scenes/Milestone 1.unity
+    guid: 8faec4cdfe79057469bd4f4c753aba37
   m_configObjects: {}
