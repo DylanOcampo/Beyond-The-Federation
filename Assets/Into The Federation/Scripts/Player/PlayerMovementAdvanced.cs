@@ -192,18 +192,25 @@ public class PlayerMovementAdvanced : MonoBehaviour
         
         if (Input.GetKeyUp(jumpKey) && DoOnceJump)
         {
+            
             doublejump = true;
             DoOnceJump = false;
+
         }
 
         if(grounded && !Input.GetKey(jumpKey))
         {
             doublejump = false;
             DoOnceJump = true;
+            if (!readyToJump)
+            {
+                readyToJump = true;
+            }
         }
-
+        
         if(Input.GetKey(attackKey) && grounded && CanAttack)
         {
+            Debug.Log("AAAAAAAA");
             Attack();
             CanAttack = false;
         }
