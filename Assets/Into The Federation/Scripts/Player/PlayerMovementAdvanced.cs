@@ -28,14 +28,14 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public Animator PlayerAnimation, FlipAnimation;
     public SpriteRenderer PlayerSpriteRenderer;
     private bool  MovingBackwards;
-    public Transform GroundPoint;
+
 
     [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
     bool doublejump = false;
-    bool readyToJump;
+    bool readyToJump = false;
     bool DoOnceJump = true;
 
     [Header("Crouching")]
@@ -151,6 +151,14 @@ public class PlayerMovementAdvanced : MonoBehaviour
             
         PlayerAnimation.SetBool("movingBackwards", MovingBackwards);
 
+        if(state == MovementState.air)
+        {
+            PlayerAnimation.SetBool("Air", true);
+        }
+        if (state == MovementState.walking || state == MovementState.sprinting || state == MovementState.crouching || grounded)
+        {
+            PlayerAnimation.SetBool("Air", false);
+        }
             
     }
 
@@ -235,11 +243,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
             crouching = false;
         }
 
-        if(!PlayerSpriteRenderer.flipX && horizontalInput < 0){
+        if(!PlayerSpriteRenderer.flipX && horizontalInput > 0){
             PlayerSpriteRenderer.flipX = true;
             FlipAnimation.SetTrigger("Flip");
 
-        }else if(PlayerSpriteRenderer.flipX && horizontalInput > 0){
+        }else if(PlayerSpriteRenderer.flipX && horizontalInput < 0){
             PlayerSpriteRenderer.flipX = false;
             FlipAnimation.SetTrigger("Flip");
         }
@@ -455,6 +463,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        PlayerAnimation.SetTrigger("Jumping");
     }
     private void ResetJump()
     {
