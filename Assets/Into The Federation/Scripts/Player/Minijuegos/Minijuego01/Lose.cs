@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Lose : MonoBehaviour
 {
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "flechas")
         {

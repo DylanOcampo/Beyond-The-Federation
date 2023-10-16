@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EliminarFlechas : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "flechas")
         {

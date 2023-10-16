@@ -6,7 +6,7 @@ public class ManagerMG01 : MonoBehaviour
 {
     public GameObject minijuego01;
     public GameObject limpiaflechas;
-    public PlayerMovement jugador;
+    public PlayerMovementAdvanced jugador;
 
 
     private void Start()
