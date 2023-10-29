@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65000011783609610}
   - component: {fileID: 65000012938556152}
   - component: {fileID: 65000013077296896}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Streetlight_2B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

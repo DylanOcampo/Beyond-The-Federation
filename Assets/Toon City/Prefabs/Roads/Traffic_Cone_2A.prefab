@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000010876923692}
   - component: {fileID: 64000010479522886}
   - component: {fileID: 54000013269571520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Traffic_Cone_2A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

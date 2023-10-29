@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000013355950122}
   - component: {fileID: 65000010226268492}
   - component: {fileID: 65000010841400780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Streetsign_2F
   m_TagString: Untagged
   m_Icon: {fileID: 0}

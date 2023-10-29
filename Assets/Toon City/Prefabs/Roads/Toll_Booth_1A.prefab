@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011166352584}
   - component: {fileID: 33000010577647926}
   - component: {fileID: 23000013058401312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toll_Both_Barrier_1D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 33000013809595820}
   - component: {fileID: 23000011151567412}
   - component: {fileID: 64000013002597122}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toll_Booth_1A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 4000011292346712}
   - component: {fileID: 33000012933685924}
   - component: {fileID: 23000010282060614}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toll_Both_Barrier_1B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 4000010451661282}
   - component: {fileID: 33000010709557878}
   - component: {fileID: 23000013135776912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toll_Both_Barrier_1C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 4000012767580374}
   - component: {fileID: 33000011065592424}
   - component: {fileID: 23000012007759662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toll_Both_Barrier_1A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
