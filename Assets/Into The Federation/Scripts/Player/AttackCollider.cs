@@ -6,7 +6,7 @@ public class AttackCollider : MonoBehaviour
 {
 
     public GameObject attackCollider;
-    public PlayerMovementAdvanced Player;
+    public RoierPlayer Player;
     // Start is called before the first frame update
     void Start()
     {

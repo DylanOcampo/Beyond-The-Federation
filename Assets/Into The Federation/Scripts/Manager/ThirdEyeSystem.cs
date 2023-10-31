@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine.Events;
+using System;
 
 public class ThirdEyeSystem : MonoBehaviour
 {
@@ -23,41 +23,33 @@ public class ThirdEyeSystem : MonoBehaviour
     public class ThirdEyeSystemEvent : UnityEvent<bool> { }
     
     public ThirdEyeSystemEvent OnActivate;
-    public GameObject  CanvasColor;
-    public Camera MainCamera;
-    private bool Switch = false;
-    private int NormalViewMask;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        NormalViewMask = MainCamera.cullingMask;
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    public event Action onThirdEyeSystemEnter;
+    public void ThirdEyeSystemEnter()
     {
-        
-        if (Input.GetMouseButtonDown(2)){
-            Switch = !Switch;
-            if(Switch){
-                CanvasColor.SetActive(true);
-                MainCamera.cullingMask = -1;
-                CanvasColor.GetComponent<CanvasGroup>().DOFade(1, .5f);
-                
-            }else{
-                MainCamera.cullingMask = NormalViewMask;
-                
-                CanvasColor.GetComponent<CanvasGroup>().DOFade(0, .5f).OnComplete(() => {CanvasColor.SetActive(false);});
-            }
-            OnActivate?.Invoke(Switch);
+        if(onThirdEyeSystemEnter != null)
+        {
+            onThirdEyeSystemEnter();
         }
-        
     }
-    private void ChangeCameras(bool _value){
-        
-        
+
+    public event Action onThirdEyeSystemExit;
+    public void ThirdEyeSystemExit()
+    {
+        if (onThirdEyeSystemExit != null)
+        {
+            onThirdEyeSystemExit();
+        }
     }
+
 
 }

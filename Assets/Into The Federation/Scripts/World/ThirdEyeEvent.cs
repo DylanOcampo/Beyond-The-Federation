@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
+
 public class ThirdEyeEvent : MonoBehaviour
 {
-    public ThirdEyeSystem ThirdEye;
+    
     // Start is called before the first frame update
     void Start()
     {
-        //ThirdEye.OnActivate.AddListener(OnActivate);
+        ThirdEyeSystem.instance.onThirdEyeSystemEnter += ThirdEyeSystemEnter;
+        ThirdEyeSystem.instance.onThirdEyeSystemEnter += ThirdEyeSystemExit;
+
     }
     void OnDestroy(){
         //ThirdEye.OnActivate.RemoveListener(OnActivate);
@@ -21,7 +22,12 @@ public class ThirdEyeEvent : MonoBehaviour
         
     }
 
-    public void OnActivate(bool _value){
-        gameObject.SetActive(_value);
+    public void ThirdEyeSystemEnter(){
+        gameObject.SetActive(true);
+    }
+
+    public void ThirdEyeSystemExit()
+    {
+        gameObject.SetActive(false);
     }
 }

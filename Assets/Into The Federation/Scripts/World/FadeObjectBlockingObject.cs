@@ -7,7 +7,7 @@ public class FadeObjectBlockingObject : MonoBehaviour
     [SerializeField]
     private LayerMask LayerMask;
     [SerializeField]
-    private Transform Player;
+    public Transform Player;
     [SerializeField]
     private Camera Camera;
     [SerializeField]
