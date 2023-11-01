@@ -1,66 +1,115 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource source;
-    public Animator _animator;
-    public AudioClip[] clip = new AudioClip[20];
+    private static AudioManager _instance;
+
+    public static AudioManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<AudioManager>();
+            }
+            return _instance;
+        }
+    }
+
+    public AudioSource Music, Sounds;
+    public AudioClip[] sounds = new AudioClip[20];
+    public AudioClip[] music = new AudioClip[20];
+
+    List<string> subs; 
+
+    private GameObject SubsFinalPosition, SubsText, timeobject;
+    Tweener SubsAni;
+    private int SubsPosition;
+    private AudioClip audioEcplise;
+    Vector3 Pos;
+
+    
 
     void Update()
     {
-        
+
     }
+
+    public void setObjects(GameObject _SubsFinalPosition, GameObject _SubsText, GameObject _timeobject)
+    {
+
+        SubsFinalPosition = _SubsFinalPosition; 
+        SubsText = _SubsText;
+        timeobject = _timeobject;
+
+    }
+    public void PlayClipMusic(int i)
+    {
+        Music.PlayOneShot(music[i]);
+    }
+
     public void PlayClip(int i)
     {
-        source.PlayOneShot(clip[i]);
-    }
-     
-
-    public void Shooting()
-    {
-        PlayClip(1);
-    }
-    public void Walking()
-    {
-        PlayClip(2);
-    }
-    public void Atacking()
-    {
-        PlayClip(Random.Range(6, 8));
+        Sounds.PlayOneShot(sounds[i]);
     }
 
-    public void Jump()
+    public void Subs(List<string> _subs, AudioClip _audio)
     {
-        PlayClip(3);
-    }
-
-    public void Roll()
-    {
-        Debug.Log("Roll");
-        PlayClip(4);
-    }
-    public void Hit()
-    {
-        PlayClip(0);
-    }
-    public void Heal()
-    {
-        PlayClip(5);
-    }
-    public void HitSpider()
-    {
-        PlayClip(9);
+        audioEcplise = _audio;
+        Sounds.PlayOneShot(audioEcplise);
+        Pos = timeobject.transform.position;
+        SubsAni = SubsText.transform.DOMove(SubsFinalPosition.transform.position, .5f).Pause().SetAutoKill(false);
+        subs = _subs;
+        
+        SubsPosition = 0;
+        SubsLogic();
 
     }
-    public void Spidersound()
+
+
+
+    private void SubsLogic()
     {
-        PlayClip(10);
+        if (subs[SubsPosition] == "")
+        {
+            SubsPosition++;
+            SubsLogic();
+        }
+        else
+        {
+            timeobject.transform.position = Pos;
+            SubsText.GetComponentInChildren<TextMeshProUGUI>().text = subs[SubsPosition];
+            SubsAni.Play();
+            SubsAni.OnComplete(() => {
+                timeobject.transform.DOMove(SubsFinalPosition.transform.position, audioEcplise.length / subs.Count).OnComplete(() => {
+                    SubsAni.Rewind();
+                    SubsPosition++;
+                    SubsLogic();
+
+                }); ;
+
+
+            });
+        }
+        
     }
-    public void StepsSpider()
+
+
+
+
+
+    public void OnvalChangeMusic(float val)
     {
-        PlayClip(11);
+        Music.volume = val;
+    }
+    public void OnvalChangeSFX(float val)
+    {
+        Sounds.volume = val;
     }
 
 }

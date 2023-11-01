@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 33763394974455376}
   - component: {fileID: 23817697472458558}
   - component: {fileID: 64675010955411298}
-  m_Layer: 0
+  - component: {fileID: 3812816222085179894}
+  m_Layer: 7
   m_Name: Tree_5_High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +31,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+<<<<<<< HEAD
   m_ConstrainProportionsScale: 1
+=======
+  m_ConstrainProportionsScale: 0
+>>>>>>> Dylan
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -107,3 +112,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ce18325290a1f0941a634051ae7493d4, type: 3}
+--- !u!114 &3812816222085179894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207640457301550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e27cd0c3696f649966dc9497ba940f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
+  Position: {x: 0, y: 0, z: 0}
+  Materials: []
+  InitialAlpha: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000010490232320}
   - component: {fileID: 33000013810242334}
   - component: {fileID: 23000010632426746}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light_Green_3B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 65000012954023094}
   - component: {fileID: 65000010464759556}
   - component: {fileID: 65000010366049242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Streetlight_3B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 4000012925748234}
   - component: {fileID: 33000010908038118}
   - component: {fileID: 23000012462380388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light_Red_3B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 4000010343622970}
   - component: {fileID: 33000010074101314}
   - component: {fileID: 23000011682357978}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stopsign_3B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
