@@ -36,6 +36,7 @@ public class ThirdEyeSystem : MonoBehaviour
     public event Action onThirdEyeSystemEnter;
     public void ThirdEyeSystemEnter()
     {
+        Debug.Log("a");
         if(onThirdEyeSystemEnter != null)
         {
             onThirdEyeSystemEnter();

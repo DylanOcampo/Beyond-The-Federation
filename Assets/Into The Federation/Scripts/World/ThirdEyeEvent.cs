@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class ThirdEyeEvent : MonoBehaviour
 {
-    
+    public enum TypeOfEvent {ShowObject, Collider, Interactable}
+    public TypeOfEvent types;
+
+
     // Start is called before the first frame update
     void Start()
     {
         ThirdEyeSystem.instance.onThirdEyeSystemEnter += ThirdEyeSystemEnter;
-        ThirdEyeSystem.instance.onThirdEyeSystemEnter += ThirdEyeSystemExit;
-
+        ThirdEyeSystem.instance.onThirdEyeSystemExit += ThirdEyeSystemExit;
+        
     }
+
+
+
+
     void OnDestroy(){
         //ThirdEye.OnActivate.RemoveListener(OnActivate);
     }
@@ -23,11 +30,40 @@ public class ThirdEyeEvent : MonoBehaviour
     }
 
     public void ThirdEyeSystemEnter(){
-        gameObject.SetActive(true);
+        
+        if (types == TypeOfEvent.ShowObject)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        if(types == TypeOfEvent.Collider)
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+        if( types == TypeOfEvent.Interactable)
+        {
+
+        }
+
+
+        
     }
 
     public void ThirdEyeSystemExit()
     {
-        gameObject.SetActive(false);
+        if (types == TypeOfEvent.ShowObject)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+        if (types == TypeOfEvent.Collider)
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        if (types == TypeOfEvent.Interactable)
+        {
+
+        }
+
     }
 }

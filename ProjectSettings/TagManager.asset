@@ -6,6 +6,8 @@ TagManager:
   tags:
   - casillaTag
   - flechas
+  - AttackCollider
+  - Feather
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - UI
   - Cellbit Third Eye
   - Edificios
-  - 
+  - AttackCollider
   - Player
   - 
   - 

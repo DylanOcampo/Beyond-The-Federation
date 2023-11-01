@@ -27,6 +27,7 @@ public class AttackCollider : MonoBehaviour
 
     public void Animation_AttackColliderOff()
     {
+        Player.RecoilAttack();
         attackCollider.SetActive(false);
         Player.CanAttack = true;
     }

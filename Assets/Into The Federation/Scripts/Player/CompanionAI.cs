@@ -9,7 +9,7 @@ public class CompanionAI : MonoBehaviour
 
     public float followRange, standRange;
     public LayerMask whatIsPlayer;
-    bool playerInFollowRange, playerInStandRange;
+    public bool playerInFollowRange, playerInStandRange;
     public GameObject player, camara;
     public SpriteRenderer PlayerSpriteRenderer;
     public Animator FlipAnimation, animator;
@@ -43,7 +43,7 @@ public class CompanionAI : MonoBehaviour
 
     public void FlipAnimate(bool? _flipX, bool? _movingBackwards )
     {
-        Debug.Log(_flipX);
+        
         if (_flipX != null)
         {
             PlayerSpriteRenderer.flipX = (bool)_flipX;

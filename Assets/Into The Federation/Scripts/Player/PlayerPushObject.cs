@@ -4,30 +4,70 @@ using UnityEngine;
 
 public class PlayerPushObject : MonoBehaviour
 {
-    [SerializeField]
-    private float forceMagnitude;
+    Rigidbody rb;
+    IEnumerator CheckCo;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        var rigidBody = hit.collider.attachedRigidbody;
-
-        if (rigidBody != null)
+        if (other.gameObject.name == "Roier")
         {
-            var forceDirection = hit.gameObject.transform.position - transform.position;
-            forceDirection.y = 0;
-            forceDirection.Normalize();
+            if (other.gameObject.GetComponent<RoierPlayer>().isPushing)
+            {
+                rb.mass = 1;
+            }
+            else
+            {
+                if(CheckCo == null)
+                {
+                    CheckCo = Check(other.gameObject);
+                    StartCoroutine(CheckCo);
+                }
+                
+            }
+        }
+    }
 
-            rigidBody.AddForceAtPosition(forceDirection * forceMagnitude, transform.position, ForceMode.Impulse);
+    IEnumerator Check(GameObject other)
+    {
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            if (other.GetComponent<RoierPlayer>().isPushing)
+            {
+                rb.mass = 1;
 
+            }
+            if (!other.GetComponent<RoierPlayer>().isPushing && rb.mass == 1)
+            {
+                rb.mass = 10;
+
+            }
 
         }
     }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            rb.mass = 10;
+            if(CheckCo != null)
+            {
+
+                StopCoroutine(CheckCo);
+                CheckCo = null;
+            }
+        }
+    }
+
 }

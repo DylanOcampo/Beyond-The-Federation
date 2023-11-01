@@ -23,6 +23,8 @@ public class RoierPlayer : MonoBehaviour
     public float groundDrag;
 
     [Header("Attack")]
+    public bool isPushing = false;
+    public float ForceRecoil = 10;
 
     [Header("Animations")]
     public Animator PlayerAnimation, FlipAnimation;
@@ -48,6 +50,7 @@ public class RoierPlayer : MonoBehaviour
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
     public KeyCode attackKey = KeyCode.Mouse0;
+    public KeyCode pushkey = KeyCode.Mouse1;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -203,6 +206,18 @@ public class RoierPlayer : MonoBehaviour
             }
 
         }
+        if (Input.GetKeyDown(pushkey))
+        {
+            Debug.Log("Pusheando");
+            isPushing = true;
+
+        }
+        if (Input.GetKeyUp(pushkey))
+        {
+
+            isPushing = false;
+
+        }
 
         if (Input.GetKeyUp(jumpKey) && DoOnceJump)
         {
@@ -224,7 +239,7 @@ public class RoierPlayer : MonoBehaviour
 
         if (Input.GetKey(attackKey) && grounded && CanAttack)
         {
-            Debug.Log("AAAAAAAA");
+            
             Attack();
             CanAttack = false;
         }
@@ -466,9 +481,21 @@ public class RoierPlayer : MonoBehaviour
     private void Attack()
     {
         PlayerAnimation.SetTrigger("Attack");
+        
+        
 
     }
 
+    public void RecoilAttack() {
+        if (PlayerSpriteRenderer.flipX)
+        {
+            rb.AddForce(-gameObject.transform.right * ForceRecoil, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(gameObject.transform.right * ForceRecoil, ForceMode.Impulse);
+        }
+    }
 
 
     private void Jump()
