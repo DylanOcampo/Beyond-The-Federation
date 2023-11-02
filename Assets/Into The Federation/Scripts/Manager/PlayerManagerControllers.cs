@@ -11,6 +11,8 @@ public class PlayerManagerControllers : MonoBehaviour
 
     bool SwitchCharacter = false;
 
+    bool LockPlayer = false;
+
     private static PlayerManagerControllers _instance;
     public static PlayerManagerControllers instance
     {
@@ -47,6 +49,28 @@ public class PlayerManagerControllers : MonoBehaviour
         }
     }
 
+    public void LockPlayerControl()
+    {
+        if (!LockPlayer)
+        {
+            Roier.GetComponent<RoierPlayer>().enabled = false;
+            Cellbit.GetComponent<CellbitPlayer>().enabled = false;
+        }
+        else
+        {
+            if (!SwitchCharacter)
+            {
+                Roier.GetComponent<RoierPlayer>().enabled = true;
+            }
+            else
+            {
+                Cellbit.GetComponent<CellbitPlayer>().enabled = true;
+            }
+        }
+
+        LockPlayer = !LockPlayer;
+    }
+
 
 
     private void ChangePlayableCharacter()
@@ -58,11 +82,13 @@ public class PlayerManagerControllers : MonoBehaviour
             Cellbit.GetComponent<NavMeshAgent>().enabled = true;
 
             Roier.layer = LayerMask.NameToLayer("Player");
+            Roier.tag = "Player";
             Cellbit.layer = LayerMask.NameToLayer("Default");
-
+            Cellbit.tag = "Untagged";
             Roier.GetComponent<CompanionAI>().enabled = false;
             Roier.GetComponent<NavMeshAgent>().enabled = false;
-            Camara.GetComponentInChildren<CameraController>().target = Roier.transform;
+
+            CamaraMovementManager.instance.Player = Roier.transform;
             Camara.GetComponentInChildren<FadeObjectBlockingObject>().Player = Roier.transform;
 
 
@@ -76,11 +102,12 @@ public class PlayerManagerControllers : MonoBehaviour
             Cellbit.GetComponent<NavMeshAgent>().enabled = false;
 
             Cellbit.layer = LayerMask.NameToLayer("Player");
+            Cellbit.tag = "Player";
             Roier.layer = LayerMask.NameToLayer("Default");
-
+            Roier.tag = "Untagged";
             Roier.GetComponent<CompanionAI>().enabled = true;
             Roier.GetComponent<NavMeshAgent>().enabled = true;
-            Camara.GetComponentInChildren<CameraController>().target = Cellbit.transform;
+            CamaraMovementManager.instance.Player = Cellbit.transform;
             Camara.GetComponentInChildren<FadeObjectBlockingObject>().Player = Cellbit.transform;
 
             Roier.GetComponent<RoierPlayer>().enabled = false;

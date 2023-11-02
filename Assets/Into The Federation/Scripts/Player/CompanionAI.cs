@@ -38,7 +38,7 @@ public class CompanionAI : MonoBehaviour
             }
             
         }
-        gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
+        gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     public void FlipAnimate(bool? _flipX, bool? _movingBackwards )
