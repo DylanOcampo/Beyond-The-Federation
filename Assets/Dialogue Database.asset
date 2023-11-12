@@ -1380,8 +1380,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 87.11767, y: 191.63414}
-    canvasZoom: 0.7300001
+    canvasScrollPosition: {x: 36.134453, y: 0}
+    canvasZoom: 0.64000016
   - id: 3
     fields:
     - title: Title
@@ -1818,11 +1818,11 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 4
         type: 5
@@ -1834,15 +1834,15 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: "Ya tienes mi caf\xE9?"
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 4
       isRoot: 0
       isGroup: 0
@@ -1971,8 +1971,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 82
-        y: 206
+        x: 78.694214
+        y: 216.7438
         width: 160
         height: 30
     - id: 5
@@ -2026,8 +2026,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 266.06384
-        y: 189.06381
+        x: 263.5845
+        y: 199.80762
         width: 160
         height: 30
     - id: 6
@@ -2075,8 +2075,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 447
-        y: 195
+        x: 491.6281
+        y: 200.78513
         width: 160
         height: 30
     - id: 7
@@ -2130,7 +2130,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 4.85437, y: 0}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 1.03
   syncInfo:
     syncActors: 0
