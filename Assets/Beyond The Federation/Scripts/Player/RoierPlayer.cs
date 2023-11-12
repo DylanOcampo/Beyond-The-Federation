@@ -11,10 +11,6 @@ public class RoierPlayer : MonoBehaviour
     private float lastDesiredMoveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
-    public float slideSpeed;
-    public float wallrunSpeed;
-    public float climbSpeed;
-    public float vaultSpeed;
     public float airMinSpeed;
 
     public float speedIncreaseMultiplier;
@@ -63,8 +59,6 @@ public class RoierPlayer : MonoBehaviour
     private bool exitingSlope;
 
     [Header("References")]
-
-
     public Transform orientation;
 
     float horizontalInput;
@@ -89,19 +83,9 @@ public class RoierPlayer : MonoBehaviour
         air
     }
 
-    public bool sliding;
-    public bool crouching;
-    public bool wallrunning;
-    public bool climbing;
-    public bool vaulting;
+    public bool crouching, freeze, unlimited;
 
-    public bool freeze;
-    public bool unlimited;
 
-    public bool restricted;
-
-    public TextMeshProUGUI text_speed;
-    public TextMeshProUGUI text_mode;
 
     [HideInInspector]
     public bool CanAttack = true;
@@ -310,50 +294,6 @@ public class RoierPlayer : MonoBehaviour
             desiredMoveSpeed = 999f;
         }
 
-        // Mode - Vaulting
-        else if (vaulting)
-        {
-            state = MovementState.vaulting;
-            desiredMoveSpeed = vaultSpeed;
-        }
-
-        // Mode - Climbing
-        else if (climbing)
-        {
-            state = MovementState.climbing;
-            desiredMoveSpeed = climbSpeed;
-        }
-
-        // Mode - Wallrunning
-        else if (wallrunning)
-        {
-            state = MovementState.wallrunning;
-            desiredMoveSpeed = wallrunSpeed;
-        }
-
-        // Mode - Sliding
-        else if (sliding)
-        {
-            state = MovementState.sliding;
-
-            // increase speed by one every second
-            if (OnSlope() && rb.velocity.y < 0.1f)
-            {
-                desiredMoveSpeed = slideSpeed;
-                keepMomentum = true;
-            }
-
-            else
-                desiredMoveSpeed = sprintSpeed;
-        }
-
-        // Mode - Crouching
-        else if (crouching)
-        {
-            state = MovementState.crouching;
-            desiredMoveSpeed = crouchSpeed;
-        }
-
         // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey))
         {
@@ -427,9 +367,8 @@ public class RoierPlayer : MonoBehaviour
 
     private void MovePlayer()
     {
-        //if (climbingScript.exitingWall) return;
-        //if (climbingScriptDone.exitingWall) return;
-        if (restricted) return;
+        
+        
 
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -453,7 +392,7 @@ public class RoierPlayer : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
         // turn gravity off while on slope
-        if (!wallrunning) rb.useGravity = !OnSlope();
+        
     }
 
     private void SpeedControl()

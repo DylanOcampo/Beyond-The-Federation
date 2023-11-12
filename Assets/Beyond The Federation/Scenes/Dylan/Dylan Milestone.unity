@@ -13923,10 +13923,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
-  slideSpeed: 30
-  wallrunSpeed: 8.5
-  climbSpeed: 3
-  vaultSpeed: 15
   airMinSpeed: 7
   speedIncreaseMultiplier: 1.5
   slopeIncreaseMultiplier: 2.5
@@ -13954,16 +13950,9 @@ MonoBehaviour:
   maxSlopeAngle: 60
   orientation: {fileID: 505821670}
   state: 0
-  sliding: 0
   crouching: 0
-  wallrunning: 0
-  climbing: 0
-  vaulting: 0
   freeze: 0
   unlimited: 0
-  restricted: 0
-  text_speed: {fileID: 0}
-  text_mode: {fileID: 0}
   CanAttack: 1
 --- !u!195 &505821677
 NavMeshAgent:
@@ -36462,11 +36451,7 @@ MonoBehaviour:
   FeatherForce: 10
   orientation: {fileID: 1357572487}
   state: 0
-  sliding: 0
   crouching: 0
-  wallrunning: 0
-  climbing: 0
-  vaulting: 0
   freeze: 0
   unlimited: 0
   restricted: 0
@@ -64351,6 +64336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 505821670}
+  offsetY: 0
 --- !u!1 &6929474806041525240
 GameObject:
   m_ObjectHideFlags: 0

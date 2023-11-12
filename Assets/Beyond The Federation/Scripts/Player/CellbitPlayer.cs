@@ -89,12 +89,8 @@ public class CellbitPlayer : MonoBehaviour
         sliding,
         air
     }
-
-    public bool sliding;
     public bool crouching;
-    public bool wallrunning;
-    public bool climbing;
-    public bool vaulting;
+    
 
     public bool freeze;
     public bool unlimited;
@@ -446,8 +442,6 @@ public class CellbitPlayer : MonoBehaviour
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
-        // turn gravity off while on slope
-        if (!wallrunning) rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
