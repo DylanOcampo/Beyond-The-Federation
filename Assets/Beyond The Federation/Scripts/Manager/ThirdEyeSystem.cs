@@ -21,7 +21,7 @@ public class ThirdEyeSystem : MonoBehaviour
     }
 
     public class ThirdEyeSystemEvent : UnityEvent<bool> { }
-    
+
     public ThirdEyeSystemEvent OnActivate;
 
 
@@ -30,14 +30,14 @@ public class ThirdEyeSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public event Action onThirdEyeSystemEnter;
     public void ThirdEyeSystemEnter()
     {
         Debug.Log("a");
-        if(onThirdEyeSystemEnter != null)
+        if (onThirdEyeSystemEnter != null)
         {
             onThirdEyeSystemEnter();
         }

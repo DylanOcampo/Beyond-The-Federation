@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class OnHItDestroy : MonoBehaviour
 {
-    public GameObject ShatterPrefab;
-    public GameObject UnShatterPrefab;
-
-    public float SecondsToDestroy = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,20 +18,9 @@ public class OnHItDestroy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "AttackCollider")
+        if(other.gameObject.tag == "Player")
         {
-            ShatterPrefab.SetActive(true);
-            
-            UnShatterPrefab.gameObject.SetActive(false);
-            StartCoroutine(DestroySelf());
+            Destroy(gameObject);
         }
     }
-
-    IEnumerator DestroySelf()
-    {
-        yield return new WaitForSeconds(SecondsToDestroy);
-        Destroy(gameObject);
-    }
-
-
 }

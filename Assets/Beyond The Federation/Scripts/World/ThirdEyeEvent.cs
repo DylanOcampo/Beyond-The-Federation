@@ -1,24 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 public class ThirdEyeEvent : MonoBehaviour
 {
-    public enum TypeOfEvent {ShowObject, Collider, Interactable}
-    public TypeOfEvent types;
-
-
+    public ThirdEyeSystem ThirdEye;
     // Start is called before the first frame update
     void Start()
     {
-        ThirdEyeSystem.instance.onThirdEyeSystemEnter += ThirdEyeSystemEnter;
-        ThirdEyeSystem.instance.onThirdEyeSystemExit += ThirdEyeSystemExit;
-        
+        //ThirdEye.OnActivate.AddListener(OnActivate);
     }
-
-
-
-
     void OnDestroy(){
         //ThirdEye.OnActivate.RemoveListener(OnActivate);
     }
@@ -29,41 +21,7 @@ public class ThirdEyeEvent : MonoBehaviour
         
     }
 
-    public void ThirdEyeSystemEnter(){
-        
-        if (types == TypeOfEvent.ShowObject)
-        {
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-        }
-        if(types == TypeOfEvent.Collider)
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-        if( types == TypeOfEvent.Interactable)
-        {
-
-        }
-
-
-        
-    }
-
-    public void ThirdEyeSystemExit()
-    {
-        if (types == TypeOfEvent.ShowObject)
-        {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-        }
-        if (types == TypeOfEvent.Collider)
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-        }
-        if (types == TypeOfEvent.Interactable)
-        {
-
-        }
-
+    public void OnActivate(bool _value){
+        gameObject.SetActive(_value);
     }
 }

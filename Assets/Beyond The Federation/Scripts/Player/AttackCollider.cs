@@ -6,7 +6,7 @@ public class AttackCollider : MonoBehaviour
 {
 
     public GameObject attackCollider;
-    public RoierPlayer Player;
+    public PlayerMovementAdvanced Player;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,6 @@ public class AttackCollider : MonoBehaviour
 
     public void Animation_AttackColliderOff()
     {
-        Player.RecoilAttack();
         attackCollider.SetActive(false);
         Player.CanAttack = true;
     }
