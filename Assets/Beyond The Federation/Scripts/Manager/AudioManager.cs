@@ -50,8 +50,13 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayClipMusic(int i)
     {
+        Music.Stop();
         Music.PlayOneShot(music[i]);
     }
+
+
+
+
 
     public void PlayClip(int i)
     {

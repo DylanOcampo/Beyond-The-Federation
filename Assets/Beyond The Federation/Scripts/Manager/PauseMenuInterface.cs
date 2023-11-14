@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PauseMenuInterface : MonoBehaviour
 {
+    public PauseMenuSystem pause;
+
     // Start is called before the first frame update
-    void Start()
+    public void Idle()
     {
-        
+        pause.StartIdle();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Next()
     {
-        
+        pause.NextMenu_AnimationCallback();
     }
 }

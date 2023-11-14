@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CamaraMovementManager : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class CamaraMovementManager : MonoBehaviour
     }
 
     public Transform Player, LaberinthTarget;
-    public GameObject Camera;
-    
+    public GameObject CameraParent, ActualCamera;
+    public PostProcessVolume postv;
+
     private Vector3 offset;
 
     public bool CanFollowPlayer; 
@@ -29,6 +31,19 @@ public class CamaraMovementManager : MonoBehaviour
     void Start()
     {
         CalculateOffset();
+        
+        
+            try
+            {
+                PostProcessingManager.instance.ChangeConfiginGameScene(ActualCamera, postv);
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("Start in Main Menu");
+            }
+
+            
+        
     }
 
     // Update is called once per frame
@@ -40,8 +55,11 @@ public class CamaraMovementManager : MonoBehaviour
     public void ChangeCameraLaberinth()
     {
         CanFollowPlayer = false;
-        Camera.transform.DOMove(LaberinthTarget.position, 3).OnComplete(ChangeCameraLaberinth_Callback);
-        Camera.transform.DORotate(LaberinthTarget.eulerAngles, 3);
+        PlayerManagerControllers.instance.RotatePlayers(new Vector3(0, 0, 0));
+        CameraParent.transform.DOMove(LaberinthTarget.position, 3).OnComplete(ChangeCameraLaberinth_Callback);
+        RenderSettings.fogColor = Color.black;
+        RenderSettings.fogDensity = .02f;
+        CameraParent.transform.DORotate(LaberinthTarget.eulerAngles, 3);
         PlayerManagerControllers.instance.LockPlayerControl();
     }
 
@@ -50,24 +68,22 @@ public class CamaraMovementManager : MonoBehaviour
         CalculateOffset();
         CanFollowPlayer = true;
         PlayerManagerControllers.instance.LockPlayerControl();
+        PlayerManagerControllers.instance.Roier.GetComponent<RoierPlayer>().Light.SetActive(true);
         
     }
 
     private void FollowPlayer()
     {
         if(CanFollowPlayer){
-            Camera.transform.position = Player.position - offset;
+            CameraParent.transform.position = Player.position - offset;
 
         }
-        else
-        {
-            
-        }
+        
     }
 
     public void CalculateOffset()
     {
-        offset = Player.position - Camera.transform.position;
+        offset = Player.position - CameraParent.transform.position;
     }
 
 

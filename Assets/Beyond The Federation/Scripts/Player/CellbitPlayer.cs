@@ -32,7 +32,7 @@ public class CellbitPlayer : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool doublejump = false;
+    
     bool readyToJump = false;
     bool DoOnceJump = true;
 
@@ -64,7 +64,7 @@ public class CellbitPlayer : MonoBehaviour
     public float FeatherForce;
 
     [Header("References")]
-
+    public GameObject PauseMenu, LeftRespawn, RightRespawn;
 
     public Transform orientation;
 
@@ -99,6 +99,7 @@ public class CellbitPlayer : MonoBehaviour
 
 
     [Header("ThirdEye")]
+    
     public GameObject CanvasColor;
     public Camera MainCamera;
     private bool Switch = false;
@@ -241,50 +242,24 @@ public class CellbitPlayer : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(Feather))
+        if (Input.GetKeyDown(Feather) && !PauseMenu.activeSelf)
         {
             SpawnFeather();
         }
 
-        if (Input.GetKey(jumpKey))
+        if (Input.GetKeyDown(jumpKey))
         {
 
-            if (grounded || doublejump)
+            if (grounded )
             {
-                if (readyToJump)
-                {
-                    Jump();
-                    readyToJump = false;
-
-                }
-                if (doublejump)
-                {
-                    Jump();
-                    doublejump = false;
-                    Invoke(nameof(ResetJump), jumpCooldown);
-                }
+                Jump();
+                
 
             }
 
         }
 
-        if (Input.GetKeyUp(jumpKey) && DoOnceJump)
-        {
-
-            doublejump = true;
-            DoOnceJump = false;
-
-        }
-
-        if (grounded && !Input.GetKey(jumpKey))
-        {
-            doublejump = false;
-            DoOnceJump = true;
-            if (!readyToJump)
-            {
-                readyToJump = true;
-            }
-        }
+        
 
         // start crouch
         if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)

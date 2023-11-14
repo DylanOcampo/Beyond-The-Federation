@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThirdEyeEvent : MonoBehaviour
 {
-    public enum TypeOfEvent {ShowObject, Collider, Interactable}
+    public enum TypeOfEvent {ShowObject, Collider, Interactable, ParticleSystem}
     public TypeOfEvent types;
 
 
@@ -13,7 +13,10 @@ public class ThirdEyeEvent : MonoBehaviour
     {
         ThirdEyeSystem.instance.onThirdEyeSystemEnter += ThirdEyeSystemEnter;
         ThirdEyeSystem.instance.onThirdEyeSystemExit += ThirdEyeSystemExit;
-        
+        if (types == TypeOfEvent.ParticleSystem)
+        {
+            gameObject.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+        }
     }
 
 
@@ -40,6 +43,11 @@ public class ThirdEyeEvent : MonoBehaviour
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }
+        if(types == TypeOfEvent.ParticleSystem)
+        {
+            gameObject.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+        }
+
         if( types == TypeOfEvent.Interactable)
         {
 
@@ -63,6 +71,10 @@ public class ThirdEyeEvent : MonoBehaviour
         if (types == TypeOfEvent.Interactable)
         {
 
+        }
+        if (types == TypeOfEvent.ParticleSystem)
+        {
+            gameObject.GetComponentInChildren<ParticleSystem>().enableEmission = false;
         }
 
     }

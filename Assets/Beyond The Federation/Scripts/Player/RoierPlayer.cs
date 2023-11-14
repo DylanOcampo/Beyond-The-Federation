@@ -60,6 +60,7 @@ public class RoierPlayer : MonoBehaviour
 
     [Header("References")]
     public Transform orientation;
+    public GameObject PauseMenu, Light, LeftRespawn,  RightRespawn;
 
     float horizontalInput;
     float verticalInput;
@@ -221,7 +222,7 @@ public class RoierPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(attackKey) && grounded && CanAttack)
+        if (Input.GetKey(attackKey) && grounded && CanAttack && !PauseMenu.activeSelf)
         {
             
             Attack();

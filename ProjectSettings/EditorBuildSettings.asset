@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Beyond The Federation/Scenes/Milestone 1.unity
     guid: 8faec4cdfe79057469bd4f4c753aba37
-  - enabled: 1
+  - enabled: 0
     path: Assets/Beyond The Federation/Scenes/Dylan/Dylan Milestone.unity
     guid: ffca02898f3efaa49a1fc91d7324c40c
+  - enabled: 1
+    path: Assets/Beyond The Federation/Scenes/Milestone 2.unity
+    guid: a5440e8f21a6e744c8cc679bcaaa5acd
   m_configObjects: {}

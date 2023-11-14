@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,26 +50,134 @@ public class PlayerManagerControllers : MonoBehaviour
         }
     }
 
+    public void RotatePlayers(Vector3 value)
+    {
+        Cellbit.transform.DORotate(value, 3).OnComplete(() =>
+        {
+            if (value.y == 0)
+            {
+                
+                Cellbit.GetComponent<CompanionAI>().CameraLaberynth = true;
+            }
+        });
+        Roier.transform.DORotate(value, 3).OnComplete(() =>
+        {
+            if (value.y == 0)
+            {
+
+                Roier.GetComponent<CompanionAI>().CameraLaberynth = true;
+            }
+        });
+        
+    }
+
+
     public void LockPlayerControl()
     {
         if (!LockPlayer)
         {
             Roier.GetComponent<RoierPlayer>().enabled = false;
             Cellbit.GetComponent<CellbitPlayer>().enabled = false;
+            Cellbit.GetComponent<CompanionAI>().enabled = false;
+            Roier.GetComponent<CompanionAI>().enabled = false;
         }
         else
         {
             if (!SwitchCharacter)
             {
                 Roier.GetComponent<RoierPlayer>().enabled = true;
+                Cellbit.GetComponent<CompanionAI>().enabled = true;
             }
             else
             {
                 Cellbit.GetComponent<CellbitPlayer>().enabled = true;
+                Roier.GetComponent<CompanionAI>().enabled = true;
             }
         }
 
         LockPlayer = !LockPlayer;
+    }
+
+    public Vector3 GetSpace()
+    {
+        if (!SwitchCharacter)
+        {
+            if (Roier.GetComponent<RoierPlayer>().PlayerSpriteRenderer.flipX)
+            {
+                return Cellbit.transform.position = Roier.GetComponent<RoierPlayer>().LeftRespawn.transform.position;
+            }
+            else
+            {
+                return Cellbit.transform.position = Roier.GetComponent<RoierPlayer>().RightRespawn.transform.position;
+
+            }
+            
+        }
+        else
+        {
+            if (Cellbit.GetComponent<CellbitPlayer>().PlayerSpriteRenderer.flipX)
+            {
+                return Roier.transform.position = Cellbit.GetComponent<CellbitPlayer>().LeftRespawn.transform.position;
+            }
+            else
+            {
+                return Roier.transform.position = Cellbit.GetComponent<CellbitPlayer>().RightRespawn.transform.position;
+
+            }
+            
+        }
+    }
+
+
+    public void RespawnCompanion()
+    {
+        /*
+        Debug.Log(IsPlayerOnGround());
+        if (IsPlayerOnGround())
+        {
+            
+            if (!SwitchCharacter)
+            {
+                if (Roier.GetComponent<RoierPlayer>().PlayerSpriteRenderer.flipX)
+                {
+                    Cellbit.transform.position = Roier.GetComponent<RoierPlayer>().LeftRespawn.transform.position;
+                }
+                else
+                {
+                    Cellbit.transform.position = Roier.GetComponent<RoierPlayer>().RightRespawn.transform.position;
+
+                }
+                Cellbit.GetComponent <CompanionAI>().playerInFollowRange = true;
+            }
+            else
+            {
+                if (Cellbit.GetComponent<CellbitPlayer>().PlayerSpriteRenderer.flipX)
+                {
+                    Roier.transform.position = Cellbit.GetComponent<CellbitPlayer>().LeftRespawn.transform.position;
+                }
+                else
+                {
+                    Roier.transform.position = Cellbit.GetComponent<CellbitPlayer>().RightRespawn.transform.position;
+
+                }
+                Roier.GetComponent<CompanionAI>().playerInFollowRange = true;
+            }
+        }
+        */
+        
+    }
+    public bool IsPlayerOnGround()
+    {
+        if (!SwitchCharacter)
+        {
+            return !Roier.GetComponent<RoierPlayer>().PlayerAnimation.GetBool("Air");
+        }
+        else
+        {
+            return !Cellbit.GetComponent<CellbitPlayer>().PlayerAnimation.GetBool("Air");
+        }
+
+        
     }
 
 

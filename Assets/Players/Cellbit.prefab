@@ -35,6 +35,8 @@ Transform:
   - {fileID: 6252423032873769316}
   - {fileID: 1628575676503332156}
   - {fileID: 4303189346531200183}
+  - {fileID: 5786662103384259315}
+  - {fileID: 4616653294486189605}
   m_Father: {fileID: 4341070367505364799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9073789200974301257
@@ -194,6 +196,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3205558446294012500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5786662103384259315}
+  m_Layer: 9
+  m_Name: AiRespawnerLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5786662103384259315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205558446294012500}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.3400012, y: -1.291, z: -0.25999975}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2487790010115144850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4343550825615225332
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +354,9 @@ MonoBehaviour:
   FeatherSpawnLeft: {fileID: 1315927104103075376}
   PrefabFeather: {fileID: 8191847294758932326, guid: aee56d804fb758d4799018121126cb9e, type: 3}
   FeatherForce: 10
+  PauseMenu: {fileID: 0}
+  LeftRespawn: {fileID: 3205558446294012500}
+  RightRespawn: {fileID: 7795449466616105247}
   orientation: {fileID: 4341070367505364799}
   state: 0
   crouching: 0
@@ -355,6 +391,7 @@ MonoBehaviour:
   PlayerSpriteRenderer: {fileID: 4788617960041076127}
   FlipAnimation: {fileID: 9073789200974301257}
   animator: {fileID: 102452531769893484}
+  CameraLaberynth: 0
 --- !u!195 &2722886969455609333
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -553,6 +590,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.293, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2487790010115144850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7795449466616105247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4616653294486189605}
+  m_Layer: 9
+  m_Name: AiRespawnerRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4616653294486189605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795449466616105247}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.06, y: -1.291, z: -0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
