@@ -3,11 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
+using static UnityEditor.Experimental.GraphView.GraphView;
+
 public class PauseMenuSystem : MonoBehaviour
 {
     private bool isShowing = false;
-    public GameObject Menu;
+    public GameObject Menu, ActualBackground;
+    public Animator MenuAnimator;
+
+    public bool isThisMainMenu;
     
+    public KeyCode PauseKey = KeyCode.Escape;
+    public string NameOfGameScene;
+
+    private int CurrentState;
+    private bool CurrentStateIsFinished = false;
+
+    private void Start()
+    {
+        if (isThisMainMenu)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            gameObject.GetComponent<ASyncOperation>().StartLoadScene(NameOfGameScene);
+        }
+    }
+
+    public void SoundEnter()
+    {
+        AudioManager.instance.PlayClip(0);
+    }
+
     public void Quit()
     {
         Application.Quit();
@@ -15,22 +42,43 @@ public class PauseMenuSystem : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
+
+    public void ReloadGameScene()
+    {
+        SceneManager.LoadScene(NameOfGameScene);
+    }
+
+    public void FirstScene()
+    {
+        gameObject.GetComponent<ASyncOperation>().StartLoadedScene();
+    }
+
+
+
+
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(PauseKey) && !isThisMainMenu)
         {
+            
+            
             isShowing = !isShowing;
             Menu.SetActive(isShowing);
             if (isShowing)
             {
+                
                 Time.timeScale = 0;
             }else{
+                
                 Time.timeScale = 1;
+               
             }
         }
     }
 
-    
+   
+
 }
