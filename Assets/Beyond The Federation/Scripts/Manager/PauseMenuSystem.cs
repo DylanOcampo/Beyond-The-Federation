@@ -17,8 +17,6 @@ public class PauseMenuSystem : MonoBehaviour
     public KeyCode PauseKey = KeyCode.Escape;
     public string NameOfGameScene;
 
-    private int CurrentState;
-    private bool CurrentStateIsFinished = false;
 
     private void Start()
     {
@@ -55,7 +53,11 @@ public class PauseMenuSystem : MonoBehaviour
         gameObject.GetComponent<ASyncOperation>().StartLoadedScene();
     }
 
-
+    public void NextMenu()
+    {
+        MenuAnimator.SetTrigger("Next");
+        
+    }
 
 
 
