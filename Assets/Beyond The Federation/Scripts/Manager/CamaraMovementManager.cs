@@ -59,6 +59,7 @@ public class CamaraMovementManager : MonoBehaviour
         CameraParent.transform.DOMove(LaberinthTarget.position, 3).OnComplete(ChangeCameraLaberinth_Callback);
         RenderSettings.fogColor = Color.black;
         RenderSettings.fogDensity = .02f;
+        AudioManager.instance.PlayClipMusic(3);
         CameraParent.transform.DORotate(LaberinthTarget.eulerAngles, 3);
         PlayerManagerControllers.instance.LockPlayerControl();
     }

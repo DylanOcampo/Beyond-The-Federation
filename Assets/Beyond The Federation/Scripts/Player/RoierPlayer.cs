@@ -125,21 +125,27 @@ public class RoierPlayer : MonoBehaviour
             if (Round(rb.velocity.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(rb.velocity.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
+
 
         else
         {
             if (Round(flatVel.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(flatVel.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
+
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
         }
 
@@ -421,8 +427,8 @@ public class RoierPlayer : MonoBehaviour
     private void Attack()
     {
         PlayerAnimation.SetTrigger("Attack");
-        
-        
+        AudioManager.instance.PlayClip(2);
+
 
     }
 
@@ -442,6 +448,7 @@ public class RoierPlayer : MonoBehaviour
     {
         exitingSlope = true;
 
+        AudioManager.instance.PlayClip(20);
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

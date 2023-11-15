@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using DG.Tweening;
+using System;
 
 public class PauseMenuSystem : MonoBehaviour
 {
@@ -28,19 +27,24 @@ public class PauseMenuSystem : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             gameObject.GetComponent<ASyncOperation>().StartLoadScene(NameOfGameScene);
+            AudioManager.instance.PlayClipMusic(0);
         }
         else
         {
             MainMenu_Menu.GetComponent<CanvasGroup>().alpha = 0f;
             Inventory_Menu.GetComponent<CanvasGroup>().alpha = 0f;
+            try
+            {
+                AudioManager.instance.PlayClipMusic(1);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("StartMusic From MainMenu");
+            }
+            
         }
         
 
-    }
-
-    public void SoundEnter()
-    {
-        AudioManager.instance.PlayClip(0);
     }
 
     public void Quit()
@@ -81,9 +85,9 @@ public class PauseMenuSystem : MonoBehaviour
                 MenuAnimator.SetTrigger("Next");
             });
         }
-        
-        
-        
+        AudioManager.instance.PlayClip(15);
+
+
     }
 
     public void NextMenu_AnimationCallback()
@@ -99,6 +103,7 @@ public class PauseMenuSystem : MonoBehaviour
             Inventory_Menu.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetUpdate(true);
         }
         isInventory = !isInventory;
+        
     }
 
 
@@ -109,16 +114,30 @@ public class PauseMenuSystem : MonoBehaviour
         
     }
 
+    public void EndCallback()
+    {
+        Menu.SetActive(false);
+    }
+
     public void Resume()
     {
         isShowing = false;
-        Menu.SetActive(isShowing);
+        MenuAnimator.SetTrigger("Close");
+        AudioManager.instance.PlayClip(14);
         ActualBackground.SetActive(false);
         MainMenu_Menu.GetComponent<CanvasGroup>().alpha = 0f;
         Inventory_Menu.GetComponent<CanvasGroup>().alpha = 0f;
         Time.timeScale = 1;
     }
 
+    public void OnSelectSound()
+    {
+        AudioManager.instance.PlayClip(16);
+    }
+    public void OnSelectSound2()
+    {
+        AudioManager.instance.PlayClip(17);
+    }
 
 
     void Update()
@@ -129,9 +148,12 @@ public class PauseMenuSystem : MonoBehaviour
 
 
             isShowing = !isShowing;
+
             Menu.SetActive(isShowing);
             if (isShowing)
             {
+                AudioManager.instance.StopFootSteps();
+                AudioManager.instance.PlayClip(14);
                 MenuAnimator.speed = 1;
                 Time.timeScale = 0;
             }else{

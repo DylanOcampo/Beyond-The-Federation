@@ -145,10 +145,12 @@ public class CellbitPlayer : MonoBehaviour
             if (Round(rb.velocity.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(rb.velocity.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
 
         else
@@ -156,10 +158,12 @@ public class CellbitPlayer : MonoBehaviour
             if (Round(flatVel.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(flatVel.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
         }
 
@@ -184,6 +188,7 @@ public class CellbitPlayer : MonoBehaviour
         Switch = !Switch;
         if (Switch)
         {
+            AudioManager.instance.PlayClip(27);
             CanvasColor.SetActive(true);
             MainCamera.cullingMask = -1;
             CanvasColor.GetComponent<CanvasGroup>().DOFade(1, .5f);
@@ -205,6 +210,7 @@ public class CellbitPlayer : MonoBehaviour
 
     private void SpawnFeather()
     {
+        AudioManager.instance.PlayClip(4);
         GameObject Instance = Instantiate(PrefabFeather);
         if (!PlayerSpriteRenderer.flipX) {
             Instance.transform.position = FeatherSpawnRight.transform.position;
@@ -450,7 +456,7 @@ public class CellbitPlayer : MonoBehaviour
     private void Jump()
     {
         exitingSlope = true;
-
+        AudioManager.instance.PlayClip(20);
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

@@ -28,6 +28,7 @@ public class OnHItDestroy : MonoBehaviour
             
             UnShatterPrefab.gameObject.SetActive(false);
             StartCoroutine(DestroySelf());
+            AudioManager.instance.PlayClip(1);
         }
     }
 

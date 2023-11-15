@@ -16,4 +16,9 @@ public class PauseMenuInterface : MonoBehaviour
     {
         pause.NextMenu_AnimationCallback();
     }
+
+    public void Close()
+    {
+        pause.EndCallback();
+    }
 }
