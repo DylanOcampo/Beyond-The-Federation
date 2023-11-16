@@ -39,7 +39,7 @@ public class PauseMenuSystem : MonoBehaviour
             }
             catch (NullReferenceException)
             {
-                Debug.Log("StartMusic From MainMenu");
+                //Debug.Log("StartMusic From MainMenu");
             }
             
         }

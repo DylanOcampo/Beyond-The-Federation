@@ -2027,7 +2027,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 263.5845
-        y: 199.80762
+        y: 198.91476
         width: 160
         height: 30
     - id: 6
@@ -2106,7 +2106,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: SetActive(ExampleCoin,true)
+        value: SetActive(CoinChallenge,true)
         type: 0
         typeString: 
       conversationID: 4
@@ -2130,8 +2130,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1.03
+    canvasScrollPosition: {x: 158.54544, y: 2.7323017}
+    canvasZoom: 1.1199999
   syncInfo:
     syncActors: 0
     syncItems: 0

@@ -163,7 +163,7 @@ public class CellbitPlayer : MonoBehaviour
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
-                AudioManager.instance.StopFootSteps();
+                //AudioManager.instance.StopFootSteps();
             }
         }
 

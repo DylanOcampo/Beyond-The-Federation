@@ -39,7 +39,7 @@ public class CamaraMovementManager : MonoBehaviour
             }
             catch (System.NullReferenceException)
             {
-                Debug.Log("Start in Main Menu");
+                //Debug.Log("Start in Main Menu");
             }
 
             
