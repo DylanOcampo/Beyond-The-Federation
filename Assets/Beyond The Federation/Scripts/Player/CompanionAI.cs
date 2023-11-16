@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class CompanionAI : MonoBehaviour
     public GameObject player, camara;
     public SpriteRenderer PlayerSpriteRenderer;
     public Animator FlipAnimation, animator;
+
+    public bool CameraLaberynth = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +40,47 @@ public class CompanionAI : MonoBehaviour
                 agentPlayer.SetDestination(gameObject.transform.position);
                 animator.SetFloat("moveSpeed", 0);
             }
+
+        }
+        else
+        {
+            PlayerManagerControllers.instance.RespawnCompanion();
+        }
+
+
+
+        if (CameraLaberynth)
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
+        }
+        
+        DetectJump();
+    }
+
+    private void DetectJump()
+    {
+        
+        float diff = player.transform.position.y - gameObject.transform.position.y;      
+        if (playerInFollowRange && diff >= 2)
+        {
+            
+
+
+                gameObject.transform.DOJump(player.transform.position, .5f, 1, 1.5f).OnComplete(() =>
+                {
+
+                }); ;
+            
+
+
             
         }
-        gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
     }
+
 
     public void FlipAnimate(bool? _flipX, bool? _movingBackwards )
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
 
-    public GameObject attackCollider;
-    public PlayerMovementAdvanced Player;
+    public GameObject attackColliderLeft, attackColliderRight;
+    public RoierPlayer Player;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +22,22 @@ public class AttackCollider : MonoBehaviour
 
     public void Animation_AttackColliderOn()
     {
-        attackCollider.SetActive(true);
+        if (!Player.PlayerSpriteRenderer.flipX)
+        {
+            attackColliderRight.SetActive(true);
+        }
+        else
+        {
+            attackColliderLeft.SetActive(true);
+        }
+        
     }
 
     public void Animation_AttackColliderOff()
     {
-        attackCollider.SetActive(false);
+        Player.RecoilAttack();
+        attackColliderRight.SetActive(false);
+        attackColliderLeft.SetActive(false);
         Player.CanAttack = true;
     }
 }

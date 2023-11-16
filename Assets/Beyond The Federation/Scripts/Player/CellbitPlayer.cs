@@ -32,7 +32,7 @@ public class CellbitPlayer : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool doublejump = false;
+    
     bool readyToJump = false;
     bool DoOnceJump = true;
 
@@ -64,7 +64,7 @@ public class CellbitPlayer : MonoBehaviour
     public float FeatherForce;
 
     [Header("References")]
-
+    public GameObject PauseMenu, LeftRespawn, RightRespawn;
 
     public Transform orientation;
 
@@ -99,6 +99,7 @@ public class CellbitPlayer : MonoBehaviour
 
 
     [Header("ThirdEye")]
+    
     public GameObject CanvasColor;
     public Camera MainCamera;
     private bool Switch = false;
@@ -144,10 +145,12 @@ public class CellbitPlayer : MonoBehaviour
             if (Round(rb.velocity.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(rb.velocity.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
 
         else
@@ -155,10 +158,12 @@ public class CellbitPlayer : MonoBehaviour
             if (Round(flatVel.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(flatVel.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
         }
 
@@ -183,6 +188,7 @@ public class CellbitPlayer : MonoBehaviour
         Switch = !Switch;
         if (Switch)
         {
+            AudioManager.instance.PlayClip(27);
             CanvasColor.SetActive(true);
             MainCamera.cullingMask = -1;
             CanvasColor.GetComponent<CanvasGroup>().DOFade(1, .5f);
@@ -204,6 +210,7 @@ public class CellbitPlayer : MonoBehaviour
 
     private void SpawnFeather()
     {
+        AudioManager.instance.PlayClip(4);
         GameObject Instance = Instantiate(PrefabFeather);
         if (!PlayerSpriteRenderer.flipX) {
             Instance.transform.position = FeatherSpawnRight.transform.position;
@@ -241,50 +248,24 @@ public class CellbitPlayer : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(Feather))
+        if (Input.GetKeyDown(Feather) && !PauseMenu.activeSelf)
         {
             SpawnFeather();
         }
 
-        if (Input.GetKey(jumpKey))
+        if (Input.GetKeyDown(jumpKey))
         {
 
-            if (grounded || doublejump)
+            if (grounded )
             {
-                if (readyToJump)
-                {
-                    Jump();
-                    readyToJump = false;
-
-                }
-                if (doublejump)
-                {
-                    Jump();
-                    doublejump = false;
-                    Invoke(nameof(ResetJump), jumpCooldown);
-                }
+                Jump();
+                
 
             }
 
         }
 
-        if (Input.GetKeyUp(jumpKey) && DoOnceJump)
-        {
-
-            doublejump = true;
-            DoOnceJump = false;
-
-        }
-
-        if (grounded && !Input.GetKey(jumpKey))
-        {
-            doublejump = false;
-            DoOnceJump = true;
-            if (!readyToJump)
-            {
-                readyToJump = true;
-            }
-        }
+        
 
         // start crouch
         if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
@@ -475,7 +456,7 @@ public class CellbitPlayer : MonoBehaviour
     private void Jump()
     {
         exitingSlope = true;
-
+        AudioManager.instance.PlayClip(20);
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

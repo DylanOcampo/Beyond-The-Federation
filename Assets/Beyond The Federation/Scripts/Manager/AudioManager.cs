@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource Music, Sounds;
     public AudioClip[] sounds = new AudioClip[20];
     public AudioClip[] music = new AudioClip[20];
+    public GameObject FootSteps;
+
 
     List<string> subs;
 
@@ -50,7 +52,20 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayClipMusic(int i)
     {
+        Music.Stop();
         Music.PlayOneShot(music[i]);
+    }
+
+
+
+    public void PlayFootSteps()
+    {
+        FootSteps.SetActive(true);
+    }
+
+    public void StopFootSteps()
+    {
+        FootSteps.SetActive(false);
     }
 
     public void PlayClip(int i)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class RoierPlayer : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class RoierPlayer : MonoBehaviour
 
     [Header("References")]
     public Transform orientation;
+    public GameObject PauseMenu, Light, LeftRespawn,  RightRespawn;
 
     float horizontalInput;
     float verticalInput;
@@ -124,21 +126,35 @@ public class RoierPlayer : MonoBehaviour
             if (Round(rb.velocity.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(rb.velocity.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                AudioManager.instance.StopFootSteps();
             }
+
 
         else
         {
             if (Round(flatVel.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(flatVel.magnitude, 1));
+                AudioManager.instance.PlayFootSteps();
+
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
+                try
+                {
+                    AudioManager.instance.StopFootSteps();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Start From Main Menu");
+                }
+                
             }
         }
 
@@ -221,7 +237,7 @@ public class RoierPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(attackKey) && grounded && CanAttack)
+        if (Input.GetKey(attackKey) && grounded && CanAttack && !PauseMenu.activeSelf)
         {
             
             Attack();
@@ -420,8 +436,8 @@ public class RoierPlayer : MonoBehaviour
     private void Attack()
     {
         PlayerAnimation.SetTrigger("Attack");
-        
-        
+        AudioManager.instance.PlayClip(2);
+
 
     }
 
@@ -441,6 +457,7 @@ public class RoierPlayer : MonoBehaviour
     {
         exitingSlope = true;
 
+        AudioManager.instance.PlayClip(20);
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
