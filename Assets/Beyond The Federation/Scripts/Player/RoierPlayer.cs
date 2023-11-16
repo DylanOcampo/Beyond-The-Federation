@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class RoierPlayer : MonoBehaviour
 {
@@ -145,7 +146,15 @@ public class RoierPlayer : MonoBehaviour
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
-                AudioManager.instance.StopFootSteps();
+                try
+                {
+                    AudioManager.instance.StopFootSteps();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Start From Main Menu");
+                }
+                
             }
         }
 
