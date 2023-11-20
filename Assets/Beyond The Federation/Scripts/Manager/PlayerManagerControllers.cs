@@ -71,6 +71,17 @@ public class PlayerManagerControllers : MonoBehaviour
         
     }
 
+    public void CompanionAiJump(bool AmIRoier)
+    {
+        if (AmIRoier)
+        {
+            Cellbit.GetComponent<CompanionAI>();
+        }
+        else
+        {
+            Roier.GetComponent<CompanionAI>();
+        }
+    }
 
     public void LockPlayerControl()
     {

@@ -30,6 +30,7 @@ public class CellbitPlayer : MonoBehaviour
 
     [Header("Jumping")]
     public float jumpForce;
+    public float fallMultiplier;
     public float jumpCooldown;
     public float airMultiplier;
     
@@ -138,6 +139,11 @@ public class CellbitPlayer : MonoBehaviour
             rb.drag = 0;
 
         PlayerAnimation.SetBool("onGround", grounded);
+
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
 
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -458,6 +464,12 @@ public class CellbitPlayer : MonoBehaviour
         exitingSlope = true;
         AudioManager.instance.PlayClip(20);
         // reset y velocity
+
+        if (rb.velocity.y > 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);

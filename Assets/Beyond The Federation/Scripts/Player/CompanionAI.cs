@@ -58,27 +58,11 @@ public class CompanionAI : MonoBehaviour
             gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
         }
         
-        DetectJump();
     }
 
-    private void DetectJump()
+    public void WaitforJump()
     {
-        
-        float diff = player.transform.position.y - gameObject.transform.position.y;      
-        if (playerInFollowRange && diff >= 2)
-        {
-            
 
-
-                gameObject.transform.DOJump(player.transform.position, .5f, 1, 1.5f).OnComplete(() =>
-                {
-
-                }); ;
-            
-
-
-            
-        }
     }
 
 
