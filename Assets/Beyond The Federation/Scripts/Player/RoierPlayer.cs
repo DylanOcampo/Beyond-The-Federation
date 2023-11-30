@@ -178,7 +178,7 @@ public class RoierPlayer : MonoBehaviour
                 }
                 catch (NullReferenceException)
                 {
-                    Debug.Log("Start From Main Menu");
+                    //Debug.Log("Start From Main Menu");
                 }
                 
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FlechaIzq : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class FlechaIzq : MonoBehaviour
     private int contador = 0;
     private bool adentro = false;
 
+    private void Start()
+    {
+        transform.Rotate(0, 90, 0);
+    }
 
     void Update()
     {
-
         transform.position += transform.right * -velocidad * Time.deltaTime;
 
         if (contador == 2)
@@ -36,7 +40,7 @@ public class FlechaIzq : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "casillaTag")
         {
@@ -44,7 +48,7 @@ public class FlechaIzq : MonoBehaviour
         }
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.tag == "casillaTag")
         {

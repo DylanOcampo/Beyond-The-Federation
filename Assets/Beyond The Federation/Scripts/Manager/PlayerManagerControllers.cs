@@ -1,4 +1,5 @@
 using DG.Tweening;
+using PixelCrushers.DialogueSystem.Wrappers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,9 @@ public class PlayerManagerControllers : MonoBehaviour
 
     bool SwitchCharacter = false;
 
-    bool LockPlayer = false;
+    public bool LockPlayer = false;
+
+   
 
     private static PlayerManagerControllers _instance;
     public static PlayerManagerControllers instance
@@ -47,7 +50,9 @@ public class PlayerManagerControllers : MonoBehaviour
         if (Input.GetKeyDown(ChangeCharacterKey))
         {
             ChangePlayableCharacter();
+            Debug.Log(SwitchCharacter);
         }
+   
     }
 
     public void RotatePlayers(Vector3 value)
@@ -195,7 +200,7 @@ public class PlayerManagerControllers : MonoBehaviour
 
     private void ChangePlayableCharacter()
     {
-        if(SwitchCharacter)
+        if (SwitchCharacter)
         {
             //Change to Roier
             Cellbit.GetComponent<CompanionAI>().enabled = true;
@@ -212,8 +217,14 @@ public class PlayerManagerControllers : MonoBehaviour
             Camara.GetComponentInChildren<FadeObjectBlockingObject>().Player = Roier.transform;
 
 
-            Roier.GetComponent <RoierPlayer>().enabled = true;
+            Roier.GetComponent<RoierPlayer>().enabled = true;
             Cellbit.GetComponent<CellbitPlayer>().enabled = false;
+
+            Roier.GetComponent<ProximitySelector>().enabled = true;
+            Roier.GetComponent<BoxCollider>().enabled = true;
+
+            Cellbit.GetComponent<ProximitySelector>().enabled = false;
+            Cellbit.GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
@@ -232,6 +243,12 @@ public class PlayerManagerControllers : MonoBehaviour
 
             Roier.GetComponent<RoierPlayer>().enabled = false;
             Cellbit.GetComponent<CellbitPlayer>().enabled = true;
+
+            Roier.GetComponent<ProximitySelector>().enabled = false;
+            Roier.GetComponent<BoxCollider>().enabled = false;
+
+            Cellbit.GetComponent<ProximitySelector>().enabled = true;
+            Cellbit.GetComponent<BoxCollider>().enabled = true;
         }
         SwitchCharacter = !SwitchCharacter;
     }

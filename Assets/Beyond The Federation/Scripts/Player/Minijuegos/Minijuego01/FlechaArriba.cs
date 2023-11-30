@@ -7,7 +7,12 @@ public class FlechaArriba : MonoBehaviour
     public float velocidad;
     private int contador = 0;
     private bool adentro = false;
-    
+
+    private void Start()
+    {
+        transform.Rotate(0, 90, 0);
+    }
+
 
     void Update()
     {
@@ -36,7 +41,7 @@ public class FlechaArriba : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "casillaTag")
         {
@@ -44,7 +49,7 @@ public class FlechaArriba : MonoBehaviour
         }
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.tag == "casillaTag")
         {

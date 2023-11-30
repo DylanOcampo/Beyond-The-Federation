@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
     public GameObject FootSteps;
 
 
-    List<string> subs; 
+    List<string> subs;
 
     private GameObject SubsFinalPosition, SubsText, timeobject;
     Tweener SubsAni;
@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
     private AudioClip audioEcplise;
     Vector3 Pos;
 
-    
+
 
     void Update()
     {
@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
     public void setObjects(GameObject _SubsFinalPosition, GameObject _SubsText, GameObject _timeobject)
     {
 
-        SubsFinalPosition = _SubsFinalPosition; 
+        SubsFinalPosition = _SubsFinalPosition;
         SubsText = _SubsText;
         timeobject = _timeobject;
 
@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
         Pos = timeobject.transform.position;
         SubsAni = SubsText.transform.DOMove(SubsFinalPosition.transform.position, .5f).Pause().SetAutoKill(false);
         subs = _subs;
-        
+
         SubsPosition = 0;
         SubsLogic();
 
@@ -111,7 +111,7 @@ public class AudioManager : MonoBehaviour
 
             });
         }
-        
+
     }
 
 
