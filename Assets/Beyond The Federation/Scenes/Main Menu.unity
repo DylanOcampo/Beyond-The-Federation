@@ -1962,7 +1962,7 @@ MonoBehaviour:
   MenuAnimator: {fileID: 0}
   isThisMainMenu: 1
   PauseKey: 27
-  NameOfGameScene: FINAL SCENE
+  NameOfGameScene: FINAL Dylan
 --- !u!114 &609543984
 MonoBehaviour:
   m_ObjectHideFlags: 0
