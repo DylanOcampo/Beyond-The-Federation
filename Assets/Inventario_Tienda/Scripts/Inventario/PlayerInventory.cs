@@ -7,10 +7,8 @@ using UnityEngine.UI;
 public enum ItemType
 {
     //Los tipos de items
-    comida,
-    pluma,
-    midnight,
-    fragmentos,
+    coins,
+    linterna
 }
 public class PlayerInventory : MonoBehaviour
 {
@@ -41,10 +39,12 @@ public class PlayerInventory : MonoBehaviour
             if (inventoryActivado)
             {
                 Desactivado();
+                PlayerManagerControllers.instance.LockPlayerControl();
             }
             else
             {
                 Activado();
+                PlayerManagerControllers.instance.LockPlayerControl();
             }
         }
     }

@@ -16,7 +16,7 @@ public class FlechaIzq : MonoBehaviour
 
     void Update()
     {
-        transform.position += transform.right * -velocidad * Time.deltaTime;
+        transform.position += transform.up * -velocidad * Time.deltaTime;
 
         if (contador == 2)
         {
