@@ -22,5 +22,9 @@ public class MinMapInterface : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _MiniMapManager.ChangeTo(LocationIdentifier);
+        if(LocationIdentifier == 2)
+        {
+
+        }
     }
 }

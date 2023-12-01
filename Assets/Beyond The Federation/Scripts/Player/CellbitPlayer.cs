@@ -245,6 +245,9 @@ public class CellbitPlayer : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        horizontalInput = -horizontalInput;
+        verticalInput = -verticalInput;
+
         // when to jump
 
         if (Input.GetKeyDown(ThirdEyeInput))

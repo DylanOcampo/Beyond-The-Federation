@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8086299255028936323}
   - component: {fileID: 4901174637878762995}
   - component: {fileID: 2047378687906406297}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5712014131684908033}
   - component: {fileID: 6700825921358191530}
   - component: {fileID: 3341448423831753597}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Feather
   m_TagString: Feather
   m_Icon: {fileID: 0}

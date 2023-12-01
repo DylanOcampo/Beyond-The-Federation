@@ -338,7 +338,7 @@ MonoBehaviour:
   FlipAnimation: {fileID: 9073789200974301257}
   PlayerSpriteRenderer: {fileID: 4788617960041076127}
   jumpForce: 10
-  fallMultiplier: 0
+  fallMultiplier: 6
   jumpCooldown: 0.25
   airMultiplier: 0.4
   crouchSpeed: 3.5
