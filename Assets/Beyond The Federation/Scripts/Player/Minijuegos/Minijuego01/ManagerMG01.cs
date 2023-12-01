@@ -6,12 +6,15 @@ public class ManagerMG01 : MonoBehaviour
 {
     public GameObject minijuego01;
     public GameObject limpiaflechas;
+    public GameObject UIMonedas;
 
     public void activarMinijuego()
     {
         minijuego01.SetActive(true);
         limpiaflechas.SetActive(false);
         PlayerManagerControllers.instance.LockPlayerControl();
+        UIMonedas.SetActive(false);
+
     }
     
     public void desactivarMinijuego()
@@ -19,6 +22,7 @@ public class ManagerMG01 : MonoBehaviour
         minijuego01.SetActive(false);
         limpiaflechas.SetActive(true);
         PlayerManagerControllers.instance.LockPlayerControl();
+        UIMonedas.SetActive(true);
     }
 
 }

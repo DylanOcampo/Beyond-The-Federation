@@ -1,4 +1,5 @@
 using DG.Tweening;
+using PixelCrushers.DialogueSystem;
 using PixelCrushers.DialogueSystem.Wrappers;
 using System.Collections;
 using System.Collections.Generic;
@@ -209,11 +210,15 @@ public class PlayerManagerControllers : MonoBehaviour
             Roier.GetComponent<RoierPlayer>().enabled = true;
             Cellbit.GetComponent<CellbitPlayer>().enabled = false;
 
-            Roier.GetComponent<ProximitySelector>().enabled = true;
+
             Roier.GetComponent<BoxCollider>().enabled = true;
 
-            Cellbit.GetComponent<ProximitySelector>().enabled = false;
+
             Cellbit.GetComponent<BoxCollider>().enabled = false;
+
+            DialogueLua.SetVariable("SoyRoier", true);
+
+
         }
         else
         {
@@ -233,11 +238,12 @@ public class PlayerManagerControllers : MonoBehaviour
             Roier.GetComponent<RoierPlayer>().enabled = false;
             Cellbit.GetComponent<CellbitPlayer>().enabled = true;
 
-            Roier.GetComponent<ProximitySelector>().enabled = false;
+
             Roier.GetComponent<BoxCollider>().enabled = false;
 
-            Cellbit.GetComponent<ProximitySelector>().enabled = true;
             Cellbit.GetComponent<BoxCollider>().enabled = true;
+
+            DialogueLua.SetVariable("SoyRoier", false);
         }
         SwitchCharacter = !SwitchCharacter;
     }

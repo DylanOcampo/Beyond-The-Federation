@@ -10,7 +10,7 @@ public class UIScoreManager : AppObject
 
     private void Start()
     {
-        PointsText.text = "Coins: 0";
+        PointsText.text = "0";
     }
 
     private void OnEnable()
@@ -25,7 +25,7 @@ public class UIScoreManager : AppObject
 
     private void PointsChangedEventListener(ScoreChangeEvent _event)
     {
-        PointsText.text = "Coins: " + _event.newPoints.ToString();
+        PointsText.text = _event.newPoints.ToString();
     }
 
 }
