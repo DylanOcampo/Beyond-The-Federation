@@ -11,7 +11,7 @@ public class FlechaIzq : MonoBehaviour
 
     private void Start()
     {
-        transform.Rotate(0, 90, 0);
+        transform.Rotate(0, 0, 0);
     }
 
     void Update()

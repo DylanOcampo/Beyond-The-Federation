@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 4340232571794829669}
   - component: {fileID: 1530912008445995052}
   - component: {fileID: 3297458120668021364}
+  - component: {fileID: 5732378210509175875}
   - component: {fileID: 5357892850102522503}
+  - component: {fileID: 39080184781453712}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -106,6 +108,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5732378210509175875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506559962918541035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bb9e3c635f78c4e88d1cc78d696662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5357892850102522503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,3 +133,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsToAdd: 1
+--- !u!114 &39080184781453712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506559962918541035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d27685a927cf645a4e3c131a950684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d9e82a817b1b1fa4a9ce54c6cf920cd8, type: 3}
+  type: 0
+  nameItem: Monedas
