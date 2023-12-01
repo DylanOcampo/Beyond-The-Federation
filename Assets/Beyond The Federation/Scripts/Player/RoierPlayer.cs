@@ -207,8 +207,6 @@ public class RoierPlayer : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        horizontalInput = -horizontalInput;
-        verticalInput = -verticalInput;
 
         // when to jump
 
