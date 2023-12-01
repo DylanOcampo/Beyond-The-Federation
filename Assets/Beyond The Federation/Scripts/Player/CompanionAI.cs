@@ -48,37 +48,14 @@ public class CompanionAI : MonoBehaviour
         }
 
 
-
-        if (CameraLaberynth)
-        {
-            gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else
-        {
-            gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
-        }
+        gameObject.transform.eulerAngles = Vector3.zero;
         
-        DetectJump();
+        
     }
 
-    private void DetectJump()
+    public void WaitforJump()
     {
-        
-        float diff = player.transform.position.y - gameObject.transform.position.y;      
-        if (playerInFollowRange && diff >= 2)
-        {
-            
 
-
-                gameObject.transform.DOJump(player.transform.position, .5f, 1, 1.5f).OnComplete(() =>
-                {
-
-                }); ;
-            
-
-
-            
-        }
     }
 
 

@@ -33,6 +33,8 @@ public class PauseMenuSystem : MonoBehaviour
         {
             MainMenu_Menu.GetComponent<CanvasGroup>().alpha = 0f;
             Inventory_Menu.GetComponent<CanvasGroup>().alpha = 0f;
+            MainMenu_Menu.SetActive(false);
+            Inventory_Menu.SetActive(false);
             try
             {
                 AudioManager.instance.PlayClipMusic(1);
@@ -95,11 +97,15 @@ public class PauseMenuSystem : MonoBehaviour
         if (isInventory)
         {
             ActualBackground.SetActive(true);
+            MainMenu_Menu.SetActive(true);
+            Inventory_Menu.SetActive(false);
             MainMenu_Menu.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetUpdate(true);
         }
         else
         {
             ActualBackground.SetActive(true);
+            Inventory_Menu.SetActive(true);
+            MainMenu_Menu.SetActive(false);
             Inventory_Menu.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetUpdate(true);
         }
         isInventory = !isInventory;
@@ -110,6 +116,7 @@ public class PauseMenuSystem : MonoBehaviour
     public void StartIdle()
     {
         ActualBackground.SetActive(true);
+        MainMenu_Menu.SetActive(true);
         MainMenu_Menu.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetUpdate(true);
         
     }
@@ -125,6 +132,8 @@ public class PauseMenuSystem : MonoBehaviour
         MenuAnimator.SetTrigger("Close");
         AudioManager.instance.PlayClip(14);
         ActualBackground.SetActive(false);
+        MainMenu_Menu.SetActive(false);
+        Inventory_Menu.SetActive(false);
         MainMenu_Menu.GetComponent<CanvasGroup>().alpha = 0f;
         Inventory_Menu.GetComponent<CanvasGroup>().alpha = 0f;
         Time.timeScale = 1;
@@ -160,6 +169,8 @@ public class PauseMenuSystem : MonoBehaviour
                 ActualBackground.SetActive(false);
                 MainMenu_Menu.GetComponent<CanvasGroup>().alpha = 0f;
                 Inventory_Menu.GetComponent<CanvasGroup>().alpha = 0f;
+                MainMenu_Menu.SetActive(false);
+                Inventory_Menu.SetActive(false);
                 Time.timeScale = 1;
                
             }

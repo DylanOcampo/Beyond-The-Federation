@@ -241,6 +241,8 @@ GameObject:
   - component: {fileID: 5645730902099633815}
   - component: {fileID: 2990287838504926920}
   - component: {fileID: 2722886969455609333}
+  - component: {fileID: 5340561302675545301}
+  - component: {fileID: 2998474652289875209}
   m_Layer: 0
   m_Name: Cellbit
   m_TagString: Player
@@ -336,6 +338,7 @@ MonoBehaviour:
   FlipAnimation: {fileID: 9073789200974301257}
   PlayerSpriteRenderer: {fileID: 4788617960041076127}
   jumpForce: 10
+  fallMultiplier: 0
   jumpCooldown: 0.25
   airMultiplier: 0.4
   crouchSpeed: 3.5
@@ -344,6 +347,7 @@ MonoBehaviour:
   crouchKey: 306
   ThirdEyeInput: 325
   Feather: 323
+  Light: 113
   playerHeight: 4
   whatIsGround:
     serializedVersion: 2
@@ -414,6 +418,41 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5340561302675545301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343550825615225332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f17d3292d455242a47944a59dea99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagSpecificElements: []
+  layerSpecificElements: []
+--- !u!65 &2998474652289875209
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343550825615225332}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &4548714139550114193
 GameObject:
   m_ObjectHideFlags: 0

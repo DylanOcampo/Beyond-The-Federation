@@ -1962,7 +1962,7 @@ MonoBehaviour:
   MenuAnimator: {fileID: 0}
   isThisMainMenu: 1
   PauseKey: 27
-  NameOfGameScene: Milestone 2
+  NameOfGameScene: FINAL SCENE
 --- !u!114 &609543984
 MonoBehaviour:
   m_ObjectHideFlags: 0

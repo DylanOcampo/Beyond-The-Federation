@@ -30,11 +30,11 @@ public class CellbitPlayer : MonoBehaviour
 
     [Header("Jumping")]
     public float jumpForce;
+    public float fallMultiplier;
     public float jumpCooldown;
     public float airMultiplier;
-    
-    bool readyToJump = false;
-    bool DoOnceJump = true;
+
+    bool HasLight = false;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -46,6 +46,7 @@ public class CellbitPlayer : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftControl;
     public KeyCode ThirdEyeInput = KeyCode.Mouse2;
     public KeyCode Feather = KeyCode.Mouse0;
+    public KeyCode Light = KeyCode.Q;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -117,7 +118,7 @@ public class CellbitPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        readyToJump = true;
+        
 
         startYScale = transform.localScale.y;
     }
@@ -138,6 +139,11 @@ public class CellbitPlayer : MonoBehaviour
             rb.drag = 0;
 
         PlayerAnimation.SetBool("onGround", grounded);
+
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
 
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -188,11 +194,12 @@ public class CellbitPlayer : MonoBehaviour
         Switch = !Switch;
         if (Switch)
         {
-            AudioManager.instance.PlayClip(27);
+            
             CanvasColor.SetActive(true);
             MainCamera.cullingMask = -1;
             CanvasColor.GetComponent<CanvasGroup>().DOFade(1, .5f);
             ThirdEyeSystem.instance.ThirdEyeSystemEnter();
+            AudioManager.instance.PlayClip(27);
         }
         else
         {
@@ -238,8 +245,6 @@ public class CellbitPlayer : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        horizontalInput = -horizontalInput;
-        verticalInput = -verticalInput;
         // when to jump
 
         if (Input.GetKeyDown(ThirdEyeInput))
@@ -458,6 +463,12 @@ public class CellbitPlayer : MonoBehaviour
         exitingSlope = true;
         AudioManager.instance.PlayClip(20);
         // reset y velocity
+
+        if (rb.velocity.y > 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -466,7 +477,7 @@ public class CellbitPlayer : MonoBehaviour
     }
     private void ResetJump()
     {
-        readyToJump = true;
+        
 
         exitingSlope = false;
     }

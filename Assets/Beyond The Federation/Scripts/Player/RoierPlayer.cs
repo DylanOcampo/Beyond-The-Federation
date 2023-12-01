@@ -32,6 +32,7 @@ public class RoierPlayer : MonoBehaviour
     [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
+    public float fallMultiplier;
     public float airMultiplier;
     bool doublejump = false;
     bool readyToJump = false;
@@ -126,21 +127,46 @@ public class RoierPlayer : MonoBehaviour
             if (Round(rb.velocity.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(rb.velocity.magnitude, 1));
-                AudioManager.instance.PlayFootSteps();
+                try
+                {
+                    AudioManager.instance.StopFootSteps();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Start From Main Menu");
+                }
             }
             else
             {
                 PlayerAnimation.SetFloat("moveSpeed", 0);
-                AudioManager.instance.StopFootSteps();
+                try
+                {
+                    AudioManager.instance.StopFootSteps();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Start From Main Menu");
+                }
             }
 
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
 
         else
         {
             if (Round(flatVel.magnitude, 1) > 1)
             {
                 PlayerAnimation.SetFloat("moveSpeed", Round(flatVel.magnitude, 1));
-                AudioManager.instance.PlayFootSteps();
+                try
+                {
+                    AudioManager.instance.StopFootSteps();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Start From Main Menu");
+                }
 
             }
             else
@@ -181,8 +207,7 @@ public class RoierPlayer : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        horizontalInput = -horizontalInput;
-        verticalInput = -verticalInput;
+
         // when to jump
 
         if (Input.GetKey(jumpKey))
@@ -198,9 +223,9 @@ public class RoierPlayer : MonoBehaviour
                 }
                 if (doublejump)
                 {
-                    Jump();
+                    
                     doublejump = false;
-                    Invoke(nameof(ResetJump), jumpCooldown);
+                    
                 }
 
             }
@@ -229,11 +254,12 @@ public class RoierPlayer : MonoBehaviour
 
         if (grounded && !Input.GetKey(jumpKey))
         {
+
             doublejump = false;
             DoOnceJump = true;
             if (!readyToJump)
             {
-                readyToJump = true;
+                Invoke(nameof(ResetJump), jumpCooldown);
             }
         }
 
@@ -455,9 +481,23 @@ public class RoierPlayer : MonoBehaviour
 
     private void Jump()
     {
+        Debug.Log("jump");
         exitingSlope = true;
+        try
+        {
+            AudioManager.instance.PlayClip(20);
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("Start From Main Menu");
+        }
+        
+        
+        if(rb.velocity.y > 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
 
-        AudioManager.instance.PlayClip(20);
         // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

@@ -77,6 +77,17 @@ public class PlayerManagerControllers : MonoBehaviour
         
     }
 
+    public void CompanionAiJump(bool AmIRoier)
+    {
+        if (AmIRoier)
+        {
+            Cellbit.GetComponent<CompanionAI>();
+        }
+        else
+        {
+            Roier.GetComponent<CompanionAI>();
+        }
+    }
 
     public void LockPlayerControl()
     {
@@ -194,9 +205,11 @@ public class PlayerManagerControllers : MonoBehaviour
         {
             //Change to Roier
             Cellbit.GetComponent<CompanionAI>().enabled = true;
+            Cellbit.GetComponent<Rigidbody>().isKinematic = true;
             Cellbit.GetComponent<NavMeshAgent>().enabled = true;
 
             Roier.layer = LayerMask.NameToLayer("Player");
+            Roier.GetComponent<Rigidbody>().isKinematic = false;
             Roier.tag = "Player";
             Cellbit.layer = LayerMask.NameToLayer("Default");
             Cellbit.tag = "Untagged";
@@ -225,10 +238,12 @@ public class PlayerManagerControllers : MonoBehaviour
             //Change to cellbit
             Cellbit.GetComponent<CompanionAI>().enabled = false;
             Cellbit.GetComponent<NavMeshAgent>().enabled = false;
+            Cellbit.GetComponent<Rigidbody>().isKinematic = false;
 
             Cellbit.layer = LayerMask.NameToLayer("Player");
             Cellbit.tag = "Player";
             Roier.layer = LayerMask.NameToLayer("Default");
+            Roier.GetComponent<Rigidbody>().isKinematic = true;
             Roier.tag = "Untagged";
             Roier.GetComponent<CompanionAI>().enabled = true;
             Roier.GetComponent<NavMeshAgent>().enabled = true;
