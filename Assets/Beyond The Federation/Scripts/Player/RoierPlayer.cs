@@ -212,27 +212,37 @@ public class RoierPlayer : MonoBehaviour
 
         // when to jump
 
-        if (Input.GetKey(jumpKey))
+        if (Input.GetKeyDown(jumpKey))
         {
-
-            if (grounded || doublejump)
+            if (grounded)
             {
                 if (readyToJump)
                 {
                     Jump();
+                    if (readyToJump)
+                    {
+                        PlayerManagerControllers.instance.Cellbit.GetComponent<CompanionAI>().TriggerJump();
+                    }
                     readyToJump = false;
 
                 }
-                if (doublejump)
-                {
-                    
-                    doublejump = false;
-                    
-                }
+                
 
+            }
+            else if (doublejump)
+            {
+                
+                doublejump = false;
             }
 
         }
+        if (grounded && !Input.GetKey(jumpKey))
+        {
+
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+
         if (Input.GetKeyDown(pushkey))
         {
             Debug.Log("Pusheando");
@@ -246,24 +256,7 @@ public class RoierPlayer : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(jumpKey) && DoOnceJump)
-        {
-
-            doublejump = true;
-            DoOnceJump = false;
-
-        }
-
-        if (grounded && !Input.GetKey(jumpKey))
-        {
-
-            doublejump = false;
-            DoOnceJump = true;
-            if (!readyToJump)
-            {
-                Invoke(nameof(ResetJump), jumpCooldown);
-            }
-        }
+        
 
         if (Input.GetKey(attackKey) && grounded && CanAttack && !PauseMenu.activeSelf)
         {
@@ -272,25 +265,6 @@ public class RoierPlayer : MonoBehaviour
             CanAttack = false;
         }
 
-
-
-
-        // start crouch
-        if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
-        {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
-            crouching = true;
-        }
-
-        // stop crouch
-        if (Input.GetKeyUp(crouchKey))
-        {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-
-            crouching = false;
-        }
 
         if (!PlayerSpriteRenderer.flipX && horizontalInput > 0)
         {
@@ -483,7 +457,7 @@ public class RoierPlayer : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("jump");
+        Debug.Log("JUMP");
         exitingSlope = true;
         try
         {
@@ -510,7 +484,7 @@ public class RoierPlayer : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
-
+        doublejump = true;
         exitingSlope = false;
     }
 

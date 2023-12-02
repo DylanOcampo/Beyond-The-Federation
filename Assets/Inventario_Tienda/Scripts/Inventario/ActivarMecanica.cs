@@ -11,7 +11,8 @@ public class ActivarMecanica : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-
+            TutorialInstructionsManager.instance.TriggerInstruction(9);
+            PlayerManagerControllers.instance.Cellbit.GetComponent<CellbitPlayer>().HasLight = true;
         }
     }
 

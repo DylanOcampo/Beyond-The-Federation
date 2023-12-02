@@ -9,6 +9,7 @@ TagManager:
   - AttackCollider
   - Feather
   - Box
+  - asdf
   layers:
   - Default
   - TransparentFX

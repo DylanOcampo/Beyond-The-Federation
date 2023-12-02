@@ -15,10 +15,22 @@ public class CompanionAI : MonoBehaviour
     public SpriteRenderer PlayerSpriteRenderer;
     public Animator FlipAnimation, animator;
 
+    public Rigidbody rb;
+    public float jumpForce;
+    public float fallMultiplier;
+
+    Ease ease;
+
     public bool CameraLaberynth = false;
 
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+
+
+    public void TriggerJump()
     {
         
     }

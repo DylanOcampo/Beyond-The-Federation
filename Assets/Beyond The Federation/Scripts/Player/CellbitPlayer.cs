@@ -34,7 +34,8 @@ public class CellbitPlayer : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
 
-    bool HasLight = false;
+    public bool HasLight = false;
+    public GameObject Spotlight;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -250,6 +251,14 @@ public class CellbitPlayer : MonoBehaviour
 
         // when to jump
 
+        if(Input.GetKeyDown(Light))
+        {
+            if (HasLight)
+            {
+                Spotlight.SetActive(!Spotlight.activeSelf);
+            }
+        }
+
         if (Input.GetKeyDown(ThirdEyeInput))
         {
             ThirdEye();
@@ -275,22 +284,6 @@ public class CellbitPlayer : MonoBehaviour
 
         
 
-        // start crouch
-        if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
-        {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
-            crouching = true;
-        }
-
-        // stop crouch
-        if (Input.GetKeyUp(crouchKey))
-        {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-
-            crouching = false;
-        }
 
         if (!PlayerSpriteRenderer.flipX && horizontalInput > 0)
         {
@@ -477,6 +470,8 @@ public class CellbitPlayer : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
         PlayerAnimation.SetTrigger("Jumping");
+
+        PlayerManagerControllers.instance.Roier.GetComponent<CompanionAI>().TriggerJump();
     }
     private void ResetJump()
     {

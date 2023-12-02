@@ -33,7 +33,11 @@ public class ObjetosRecoger : MonoBehaviour
                     inventory.items[i].slotSprite.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
                     inventory.items[i].slotSprite.GetComponent<UnityEngine.UI.Image>().enabled = true;
                     Destroy(gameObject);
-                    Instantiate(particle, transform.position, Quaternion.identity); 
+                    if(particle != null)
+                    {
+                        Instantiate(particle, transform.position, Quaternion.identity);
+                    }
+                    
                     break;
                 }
 
@@ -42,7 +46,11 @@ public class ObjetosRecoger : MonoBehaviour
                     Debug.Log("Item estaqueado");
                     inventory.items[i].cantidad += 1;
                     Destroy(gameObject);
-                    Instantiate(particle, transform.position, Quaternion.identity);
+                    if(particle != null)
+                    {
+                        Instantiate(particle, transform.position, Quaternion.identity);
+                    }
+                    
                     break;
                 }
             }

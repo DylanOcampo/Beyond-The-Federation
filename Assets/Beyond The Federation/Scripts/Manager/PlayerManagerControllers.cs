@@ -94,20 +94,27 @@ public class PlayerManagerControllers : MonoBehaviour
         if (!LockPlayer)
         {
             Roier.GetComponent<RoierPlayer>().enabled = false;
+            Roier.GetComponent<NavMeshAgent>().enabled = false;
+            Cellbit.GetComponent<NavMeshAgent>().enabled = false;
             Cellbit.GetComponent<CellbitPlayer>().enabled = false;
             Cellbit.GetComponent<CompanionAI>().enabled = false;
             Roier.GetComponent<CompanionAI>().enabled = false;
+            Roier.GetComponent<CompanionAI>().animator.SetFloat("moveSpeed", 0);
+            Cellbit.GetComponent<CompanionAI>().animator.SetFloat("moveSpeed", 0);
         }
         else
         {
             if (!SwitchCharacter)
             {
                 Roier.GetComponent<RoierPlayer>().enabled = true;
+                Cellbit.GetComponent<NavMeshAgent>().enabled = true;
                 Cellbit.GetComponent<CompanionAI>().enabled = true;
+                
             }
             else
             {
                 Cellbit.GetComponent<CellbitPlayer>().enabled = true;
+                Roier.GetComponent<NavMeshAgent>().enabled = true;
                 Roier.GetComponent<CompanionAI>().enabled = true;
             }
         }
