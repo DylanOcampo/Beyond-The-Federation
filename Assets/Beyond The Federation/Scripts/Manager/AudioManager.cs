@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public AudioSource Music, Sounds;
+    public AudioSource Music, Sounds, Music1, Music2, Music3;
     public AudioClip[] sounds = new AudioClip[20];
     public AudioClip[] music = new AudioClip[20];
     public GameObject FootSteps;
@@ -52,8 +52,22 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayClipMusic(int i)
     {
-        Music.Stop();
-        Music.PlayOneShot(music[i]);
+        Music1.gameObject.SetActive(false);
+        Music2.gameObject.SetActive(false);
+        Music3.gameObject.SetActive(false);
+
+        if ( i == 0)
+        {
+            Music1.gameObject.SetActive(true);
+        }
+       if(  i == 1)
+        {
+            Music2.gameObject.SetActive(true);
+        }
+       if( i == 2)
+        {
+            Music3.gameObject.SetActive(true);
+        }
     }
 
 
@@ -71,6 +85,7 @@ public class AudioManager : MonoBehaviour
     public void PlayClip(int i)
     {
         Sounds.PlayOneShot(sounds[i]);
+        
     }
 
     public void Subs(List<string> _subs, AudioClip _audio)
@@ -121,6 +136,10 @@ public class AudioManager : MonoBehaviour
     public void OnvalChangeMusic(float val)
     {
         Music.volume = val;
+        Music1.volume = val;
+        Music2.volume = val;
+        Music3.volume = val;
+
     }
     public void OnvalChangeSFX(float val)
     {

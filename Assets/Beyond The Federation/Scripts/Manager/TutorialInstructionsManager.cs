@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class TutorialInstructionsManager : MonoBehaviour
 {
@@ -65,7 +64,7 @@ public class TutorialInstructionsManager : MonoBehaviour
         }
         if (identifier == 6)
         {
-            TextBox_txt.text = "Cellbit, presionando CLICK DERECHO del ratón, lanzará una pluma";
+            TextBox_txt.text = "Cellbit, presionando CLICK IZQUIERDO del ratón, lanzará una pluma";
         }
         if (identifier == 7)
         {
@@ -82,10 +81,10 @@ public class TutorialInstructionsManager : MonoBehaviour
 
 
 
-        if (SubsAni == null)
-        {
+        
+        
             timeobject.transform.position = Pos;
-            SubsAni.Play();
+            
             SubsAni = TextBox.transform.DOMove(TextBoxFinalPosition.transform.position, 3);
             SubsAni.OnComplete(() => {
                 timeobject.transform.DOMove(TextBoxFinalPosition.transform.position, 4).OnComplete(() => {
@@ -97,11 +96,8 @@ public class TutorialInstructionsManager : MonoBehaviour
 
             });
 
-        }
-        else
-        {
-            SubsAni.Play();
-        }
+        
+        
         
         
 

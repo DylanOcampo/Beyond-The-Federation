@@ -52,6 +52,7 @@ public class CellbitPlayer : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
+    public bool DoOnceJump;
     public bool grounded;
 
     [Header("Slope Handling")]
@@ -72,6 +73,9 @@ public class CellbitPlayer : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
+
+    IEnumerator JumpCo;
+
 
     Vector3 moveDirection;
 
@@ -104,7 +108,7 @@ public class CellbitPlayer : MonoBehaviour
     
     public GameObject CanvasColor;
     public Camera MainCamera;
-    private bool Switch = false;
+    public bool Switch = false;
     private int NormalViewMask;
 
 
@@ -123,6 +127,13 @@ public class CellbitPlayer : MonoBehaviour
 
         startYScale = transform.localScale.y;
     }
+
+    IEnumerator JumpWait()
+    {
+        yield return new WaitForSeconds(jumpCooldown);
+        JumpCo = null;
+    }
+
 
     private void Update()
     {
@@ -190,7 +201,7 @@ public class CellbitPlayer : MonoBehaviour
 }
 
 
-    private void ThirdEye()
+    public void ThirdEye()
     {
         Switch = !Switch;
         if (Switch)
@@ -273,15 +284,21 @@ public class CellbitPlayer : MonoBehaviour
         if (Input.GetKeyDown(jumpKey))
         {
 
-            if (grounded )
+            if (grounded  && DoOnceJump && JumpCo == null)
             {
                 Jump();
-                
+                JumpCo = JumpWait();
+                StartCoroutine(JumpCo);
+                DoOnceJump = false;
 
             }
 
         }
 
+        if(grounded && !Input.GetKeyDown(jumpKey) && JumpCo == null)
+        {
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
         
 
 
@@ -475,7 +492,7 @@ public class CellbitPlayer : MonoBehaviour
     }
     private void ResetJump()
     {
-        
+        DoOnceJump = true;
 
         exitingSlope = false;
     }

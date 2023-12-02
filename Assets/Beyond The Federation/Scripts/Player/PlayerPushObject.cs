@@ -48,7 +48,7 @@ public class PlayerPushObject : MonoBehaviour
             }
             if (!other.GetComponent<RoierPlayer>().isPushing && rb.mass == 1)
             {
-                rb.mass = 10;
+                rb.mass = 100;
 
             }
 
@@ -60,7 +60,7 @@ public class PlayerPushObject : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            rb.mass = 10;
+            rb.mass = 100;
             if(CheckCo != null)
             {
 

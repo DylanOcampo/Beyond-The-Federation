@@ -19,13 +19,17 @@ public class CamaraMovementManager : MonoBehaviour
         }
     }
 
-    public Transform Player, LaberinthTarget;
+    public Transform Player, LaberinthTarget, NormalPositionTarget, FinishLaberinthTarget;
+
     public GameObject CameraParent, ActualCamera;
     public PostProcessVolume postv;
 
     private Vector3 offset;
 
-    public bool CanFollowPlayer; 
+    public bool CanFollowPlayer;
+
+    public bool HasEnteredLAB;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,13 +59,60 @@ public class CamaraMovementManager : MonoBehaviour
     public void ChangeCameraLaberinth()
     {
         CanFollowPlayer = false;
-        PlayerManagerControllers.instance.RotatePlayers(new Vector3(0, 0, 0));
+
+        
+
         CameraParent.transform.DOMove(LaberinthTarget.position, 3).OnComplete(ChangeCameraLaberinth_Callback);
+
         RenderSettings.fogColor = Color.black;
         RenderSettings.fogDensity = .02f;
+
         AudioManager.instance.PlayClipMusic(2);
+
         CameraParent.transform.DORotate(LaberinthTarget.eulerAngles, 3);
+
         PlayerManagerControllers.instance.LockPlayerControl();
+        HasEnteredLAB = true;
+    }
+
+    public void ChangeCameraNormal(bool AmIExit)
+    {
+        if (HasEnteredLAB)
+        {
+            CanFollowPlayer = false;
+
+            if (!AmIExit)
+            {
+                CameraParent.transform.DOMove(NormalPositionTarget.position, 3).OnComplete(ChangeCameraNormal_Callback);
+            }
+            else
+            {
+                CameraParent.transform.DOMove(FinishLaberinthTarget.position, 3).OnComplete(ChangeCameraNormal_Callback);
+            }
+
+            
+
+            RenderSettings.fogColor = Color.white;
+
+            RenderSettings.fogDensity = 0.002f;
+
+            AudioManager.instance.PlayClipMusic(1);
+
+            CameraParent.transform.DORotate(new Vector3(5, 180, 0), 3);
+
+            PlayerManagerControllers.instance.LockPlayerControl();
+            HasEnteredLAB = false;
+        }
+        
+    }
+
+    private void ChangeCameraNormal_Callback()
+    {
+        CalculateOffset();
+        CanFollowPlayer = true;
+        PlayerManagerControllers.instance.LockPlayerControl();
+        
+
     }
 
     private void ChangeCameraLaberinth_Callback()
@@ -69,7 +120,7 @@ public class CamaraMovementManager : MonoBehaviour
         CalculateOffset();
         CanFollowPlayer = true;
         PlayerManagerControllers.instance.LockPlayerControl();
-        PlayerManagerControllers.instance.Roier.GetComponent<RoierPlayer>().Light.SetActive(true);
+        
         
     }
 

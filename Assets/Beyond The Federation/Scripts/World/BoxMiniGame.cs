@@ -16,14 +16,17 @@ public class BoxMiniGame : MonoBehaviour
         if(BadAnswer1 &&  BadAnswer2)
         {
             BadFence.transform.DOMove(BadFenceFinalPosition.transform.position, 2);
+            BadFence.GetComponent<BoxCollider>().enabled = false;
 
         }
 
         if(GoodAnswer1 && GoodAnswer2)
         {
             GoodFence.transform.DOMove(GoodFenceFinalPosition.transform.position, 2);
+            GoodFence.GetComponent<BoxCollider>().enabled = false;
         }
     }
 
+    
 
 }

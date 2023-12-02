@@ -21,6 +21,7 @@ public class ObjetosRecoger : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            AudioManager.instance.PlayClip(8);
             for (int i = 0; i < inventory.items.Length; i++)
             {
                 if(inventory.items[i].isFull == false)

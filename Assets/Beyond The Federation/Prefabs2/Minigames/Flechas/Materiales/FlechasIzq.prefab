@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2548987116840892659}
-  - component: {fileID: 7705055664576280349}
   - component: {fileID: -2008367920894185783}
   - component: {fileID: 3694139737972981170}
   - component: {fileID: 1703776194374386870}
+  - component: {fileID: 6982053399862227055}
   m_Layer: 0
   m_Name: FlechasIzq
   m_TagString: flechas
@@ -36,19 +36,6 @@ Transform:
   - {fileID: 3222812505768000757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7705055664576280349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7954046522257680832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67c4544397873b6479cc8adac443d315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 5
 --- !u!114 &-2008367920894185783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +120,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 0.05, z: 0.02}
   m_Center: {x: 0, y: -0.54480135, z: 0}
+--- !u!114 &6982053399862227055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954046522257680832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d215e42045762a408924429cbf749b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 5
 --- !u!1 &8204058749560602435
 GameObject:
   m_ObjectHideFlags: 0

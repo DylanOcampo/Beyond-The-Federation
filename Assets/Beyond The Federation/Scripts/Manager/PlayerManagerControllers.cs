@@ -214,6 +214,11 @@ public class PlayerManagerControllers : MonoBehaviour
             Cellbit.GetComponent<CompanionAI>().enabled = true;
             Cellbit.GetComponent<Rigidbody>().isKinematic = true;
             Cellbit.GetComponent<NavMeshAgent>().enabled = true;
+            if (Cellbit.GetComponent<CellbitPlayer>().Switch)
+            {
+                Cellbit.GetComponent<CellbitPlayer>().ThirdEye();
+            }
+            
 
             Roier.layer = LayerMask.NameToLayer("Player");
             Roier.GetComponent<Rigidbody>().isKinematic = false;

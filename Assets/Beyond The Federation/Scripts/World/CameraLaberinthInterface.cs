@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraLaberinthInterface : MonoBehaviour
 {
     bool DoOnce;
+    public bool AMIlAB;
+    public bool AMIExiting;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,17 +22,24 @@ public class CameraLaberinthInterface : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
-        if (!DoOnce && other.tag == "Player")
+        if (  AMIlAB && other.tag == "Player")
         {
             CamaraMovementManager.instance.ChangeCameraLaberinth();
-            DoOnce = true;
+            
         }
-        
+
+        if (!AMIlAB && other.tag == "Player")
+        {
+            Debug.Log("asdf");
+            CamaraMovementManager.instance.ChangeCameraNormal(AMIExiting);
+
+
+        }
+
+
+
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        DoOnce = false;
-    }
+    
 
 }
